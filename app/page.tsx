@@ -157,6 +157,37 @@ function SectionTag({ children }: { children: React.ReactNode }) {
   return <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">{children}</p>;
 }
 
+function SectionHeader({
+  index,
+  label,
+  note,
+  children,
+  center = false
+}: {
+  index: string;
+  label: string;
+  note: string;
+  children: React.ReactNode;
+  center?: boolean;
+}) {
+  return (
+    <div className="mb-8 grid gap-6 border-b border-white/5 pb-8 lg:grid-cols-[150px_minmax(0,1fr)_240px] lg:items-end">
+      <div className={center ? "text-center lg:text-left" : ""}>
+        <SectionTag>{label}</SectionTag>
+        <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
+      </div>
+      <div className={center ? "text-center" : ""}>{children}</div>
+      <p
+        className={`max-w-[28ch] text-sm leading-relaxed text-gray-500 ${
+          center ? "mx-auto text-center lg:ml-auto lg:mr-0 lg:text-left" : ""
+        }`}
+      >
+        {note}
+      </p>
+    </div>
+  );
+}
+
 function StatChip({ value, label }: { value: string; label: string }) {
   return (
     <div className="rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-sm">
@@ -490,22 +521,28 @@ export default function HomePage() {
 
       <SectionShell id="problem">
         <div className="rounded-[2rem] bg-[#101010] px-5 py-10 text-center shadow-cinematic sm:px-8 sm:py-14 md:px-12">
-          <SectionTag>Problem</SectionTag>
-          <div className="mx-auto mt-5 max-w-4xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl xl:text-7xl">
-            <WordsPullUpMultiStyle
-              justify="center"
-              segments={[
-                {
-                  text: "Video and 3D production is too slow, expensive, and",
-                  className: "font-normal"
-                },
-                {
-                  text: "gated by expertise.",
-                  className: "font-serif italic"
-                }
-              ]}
-            />
-          </div>
+          <SectionHeader
+            index="02"
+            label="Problem"
+            note="The opening investor question is simple: why does this market need a new production primitive at all?"
+            center
+          >
+            <div className="mx-auto max-w-4xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl xl:text-7xl">
+              <WordsPullUpMultiStyle
+                justify="center"
+                segments={[
+                  {
+                    text: "Video and 3D production is too slow, expensive, and",
+                    className: "font-normal"
+                  },
+                  {
+                    text: "gated by expertise.",
+                    className: "font-serif italic"
+                  }
+                ]}
+              />
+            </div>
+          </SectionHeader>
           <ScrollRevealText text="Crushing delays kill creative momentum, while high minimum production costs keep ambitious stories locked behind specialist teams and expensive pipelines." />
           <div className="mt-10 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
@@ -551,18 +588,23 @@ export default function HomePage() {
         <div className="grid items-end gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <RevealCard delay={0}>
             <div className="rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
-              <SectionTag>Solution</SectionTag>
-              <div className="mt-4 max-w-4xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl">
-                <WordsPullUpMultiStyle
-                  justify="start"
-                  segments={[
-                    { text: "Text-to-3D that turns ideas into", className: "font-normal" },
-                    { text: "shot-ready scenes", className: "font-serif italic" },
-                    { text: "in minutes.", className: "font-normal" }
-                  ]}
-                />
-              </div>
-              <p className="mt-6 max-w-2xl text-sm leading-relaxed text-primary/70 sm:text-base">
+              <SectionHeader
+                index="03"
+                label="Solution"
+                note="This section should read like the value unlock: speed, affordability, and creative control in one motion."
+              >
+                <div className="max-w-4xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl">
+                  <WordsPullUpMultiStyle
+                    justify="start"
+                    segments={[
+                      { text: "Text-to-3D that turns ideas into", className: "font-normal" },
+                      { text: "shot-ready scenes", className: "font-serif italic" },
+                      { text: "in minutes.", className: "font-normal" }
+                    ]}
+                  />
+                </div>
+              </SectionHeader>
+              <p className="max-w-2xl text-sm leading-relaxed text-primary/70 sm:text-base">
                 The product removes weeks of manual production overhead without removing directorial
                 control. Scenes stay editable, exportable, and production-usable.
               </p>
@@ -600,9 +642,13 @@ export default function HomePage() {
       <SectionShell id="product" className="relative overflow-hidden">
         <div className="bg-noise absolute inset-0 opacity-[0.15]" />
         <div className="relative">
-          <div className="mx-auto max-w-4xl text-center">
-            <SectionTag>Product</SectionTag>
-            <div className="mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+          <SectionHeader
+            index="04"
+            label="Product"
+            note="Organize the product like a workflow, not a feature dump. One hero canvas, then the supporting modules."
+            center
+          >
+            <div className="mx-auto max-w-4xl text-xl sm:text-2xl md:text-3xl lg:text-4xl">
               <WordsPullUpMultiStyle
                 justify="center"
                 segments={[
@@ -617,7 +663,7 @@ export default function HomePage() {
                 ]}
               />
             </div>
-          </div>
+          </SectionHeader>
 
           <div className="mt-10 grid gap-3 md:grid-cols-2 md:gap-2 lg:h-[480px] lg:grid-cols-4 lg:gap-1">
             <RevealCard delay={0}>
@@ -675,16 +721,21 @@ export default function HomePage() {
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <RevealCard delay={0}>
             <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
-              <SectionTag>Market</SectionTag>
-              <div className="mt-4 text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
-                <WordsPullUpMultiStyle
-                  justify="start"
-                  segments={[
-                    { text: "A $150B+ opportunity", className: "font-normal" },
-                    { text: "at the right inflection point.", className: "font-serif italic" }
-                  ]}
-                />
-              </div>
+              <SectionHeader
+                index="05"
+                label="Market"
+                note="The market block should quickly establish scale, timing, and why AI-native behavior makes the wedge credible."
+              >
+                <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
+                  <WordsPullUpMultiStyle
+                    justify="start"
+                    segments={[
+                      { text: "A $150B+ opportunity", className: "font-normal" },
+                      { text: "at the right inflection point.", className: "font-serif italic" }
+                    ]}
+                  />
+                </div>
+              </SectionHeader>
               <div className="mt-8 grid gap-4 sm:grid-cols-3">
                 {[ 
                   ["$150B+", "Total Market"],
@@ -733,17 +784,22 @@ export default function HomePage() {
 
       <SectionShell id="competition">
         <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
-          <SectionTag>Competition</SectionTag>
-          <div className="mt-4 max-w-5xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
-            <WordsPullUpMultiStyle
-              justify="start"
-              segments={[
-                { text: "The only platform combining", className: "font-normal" },
-                { text: "AI speed", className: "font-serif italic" },
-                { text: "with true 3D control.", className: "font-normal" }
-              ]}
-            />
-          </div>
+          <SectionHeader
+            index="06"
+            label="Competition"
+            note="Differentiate on structure, not hype. The winner here is the company that keeps both speed and control."
+          >
+            <div className="max-w-5xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
+              <WordsPullUpMultiStyle
+                justify="start"
+                segments={[
+                  { text: "The only platform combining", className: "font-normal" },
+                  { text: "AI speed", className: "font-serif italic" },
+                  { text: "with true 3D control.", className: "font-normal" }
+                ]}
+              />
+            </div>
+          </SectionHeader>
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {[
               ["AI-native speed", "Minutes, not weeks"],
@@ -808,7 +864,21 @@ export default function HomePage() {
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <RevealCard delay={0}>
             <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
-              <SectionTag>Traction</SectionTag>
+              <SectionHeader
+                index="07"
+                label="Traction"
+                note="Show that demand, retention, and monetization already exist. This section should feel compact and credible."
+              >
+                <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
+                  <WordsPullUpMultiStyle
+                    justify="start"
+                    segments={[
+                      { text: "Strong early signals.", className: "font-normal" },
+                      { text: "Scalable revenue engine.", className: "font-serif italic" }
+                    ]}
+                  />
+                </div>
+              </SectionHeader>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {[
                   ["25k+", "Waitlisted creators"],
@@ -885,19 +955,24 @@ export default function HomePage() {
 
       <SectionShell id="team-ask" className="pb-20">
         <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
-          <SectionTag>Team & Ask</SectionTag>
+          <SectionHeader
+            index="08"
+            label="Team & Ask"
+            note="Close with conviction: the right team, a specific raise, and a clear sense of where the capital goes."
+          >
+            <div className="max-w-3xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
+              <WordsPullUpMultiStyle
+                justify="start"
+                segments={[
+                  { text: "The team to build it.", className: "font-normal" },
+                  { text: "The capital to scale it.", className: "font-serif italic" }
+                ]}
+              />
+            </div>
+          </SectionHeader>
           <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
             <div>
-              <div className="max-w-3xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
-                <WordsPullUpMultiStyle
-                  justify="start"
-                  segments={[
-                    { text: "The team to build it.", className: "font-normal" },
-                    { text: "The capital to scale it.", className: "font-serif italic" }
-                  ]}
-                />
-              </div>
-              <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 md:grid-cols-2">
                 {[
                   {
                     name: "[Founder Name]",
