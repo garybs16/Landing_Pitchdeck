@@ -440,8 +440,8 @@ export default function HomePage() {
               </div>
 
               <div className="flex flex-col items-start gap-4 lg:items-end">
-                <div className="rounded-full bg-black px-4 py-2 md:px-8">
-                  <nav className="flex flex-wrap items-center gap-3 sm:gap-6 md:gap-10">
+                <div className="max-w-full overflow-x-auto rounded-full bg-black px-4 py-2 md:px-8">
+                  <nav className="flex min-w-max items-center gap-3 sm:gap-6 md:gap-10">
                     {navItems.map((item) => (
                       <a
                         key={item.href}
@@ -462,13 +462,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="mt-auto grid gap-6 pt-8 lg:grid-cols-[minmax(0,1.1fr)_380px] lg:items-end">
-              <div>
-                <p className="mb-4 text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
+            <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end">
+              <div className="flex flex-col justify-end lg:pb-8">
+                <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
                   Unstable ML
                 </p>
+                <p className="mt-4 max-w-xl font-serif text-xl italic text-primary/80 sm:text-2xl md:text-3xl">
+                  Generate cinematic 3D scenes from text in seconds.
+                </p>
                 <div
-                  className="font-medium leading-[0.84] tracking-[-0.08em] text-[18vw] sm:text-[14vw] md:text-[12vw] lg:text-[8.8vw] xl:text-[8.1vw]"
+                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[18vw] sm:text-[14vw] md:text-[12vw] lg:text-[9.2vw] xl:text-[8.4vw]"
                   style={{ color: primaryText }}
                 >
                   <span className="block lg:inline">
@@ -478,7 +481,7 @@ export default function HomePage() {
                     ML
                   </span>
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-4">
+                <div className="mt-5 flex flex-wrap items-center gap-4">
                   <span className="h-px w-20 bg-primary/40" />
                   <p className="text-xs uppercase tracking-[0.28em] text-primary/70 sm:text-sm">
                     Cinematic text-to-3D infrastructure
@@ -486,17 +489,17 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="space-y-5 lg:pb-3">
-                <p className="max-w-md text-sm leading-[1.35] text-primary/70 md:text-base">
-                  Generate cinematic 3D scenes from text in seconds. The page keeps the original
-                  pitch-deck sequence, but reframes it as a dark, premium landing experience.
+              <div className="self-end rounded-[2rem] border border-white/10 bg-black/42 p-5 shadow-cinematic backdrop-blur-md sm:p-6">
+                <p className="max-w-md text-sm leading-[1.45] text-primary/70 md:text-base">
+                  The page keeps the original pitch-deck sequence, but reframes it as a dark,
+                  premium investor narrative with clearer structure and more cinematic visual weight.
                 </p>
-                <div className="grid grid-cols-3 gap-3 lg:hidden">
+                <div className="mt-5 grid grid-cols-3 gap-3">
                   {heroStats.map(([value, label]) => (
                     <StatChip key={label} value={value} label={label} />
                   ))}
                 </div>
-                <div>
+                <div className="mt-5">
                   <a
                     href="#product"
                     className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-black transition-all duration-300 hover:gap-3 sm:text-base"
@@ -507,10 +510,10 @@ export default function HomePage() {
                     </span>
                   </a>
                 </div>
-                <p className="text-xs text-gray-500 sm:text-sm">
+                <p className="mt-5 text-xs text-gray-500 sm:text-sm">
                   [Founder Name], CEO | [Founder Name], CTO
                 </p>
-                <div className="hidden pt-2 md:block">
+                <div className="mt-5">
                   <OrbitalVisual />
                 </div>
               </div>
