@@ -187,15 +187,23 @@ function SectionHeader({
   center?: boolean;
 }) {
   return (
-    <div className="mb-8 grid gap-6 border-b border-white/5 pb-8 lg:grid-cols-[135px_minmax(0,1fr)_minmax(220px,260px)] lg:items-end lg:gap-8">
+    <div
+      className={`mb-8 grid gap-5 border-b border-white/5 pb-8 sm:gap-6 lg:gap-8 ${
+        center
+          ? "xl:grid-cols-[120px_minmax(0,1fr)] xl:items-end"
+          : "xl:grid-cols-[120px_minmax(0,1fr)_minmax(220px,260px)] xl:items-end"
+      }`}
+    >
       <div className={center ? "text-center lg:text-left" : ""}>
         <SectionTag>{label}</SectionTag>
         <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
       </div>
       <div className={`min-w-0 ${center ? "text-center" : ""}`}>{children}</div>
       <p
-        className={`max-w-[28ch] text-sm leading-relaxed text-gray-500 ${
-          center ? "mx-auto text-center lg:ml-auto lg:mr-0 lg:text-left" : "lg:justify-self-end"
+        className={`max-w-[30ch] rounded-[1.35rem] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md ${
+          center
+            ? "mx-auto text-center xl:col-start-2 xl:mx-0 xl:justify-self-end xl:text-left"
+            : "xl:justify-self-end"
         }`}
       >
         {note}
@@ -355,13 +363,14 @@ function ProductFeatureCard({
   return (
     <RevealCard delay={delay}>
       <div className="flex h-full min-h-[280px] flex-col rounded-[1.75rem] bg-[#212121] p-5 shadow-cinematic sm:p-6">
-        <div className="relative overflow-hidden rounded-[1.3rem] border border-white/5 bg-black/30 p-4">
+        <div className="relative overflow-hidden rounded-[1.3rem] border border-white/5 bg-black/30">
           <div className="cream-glow absolute inset-0 opacity-50" />
           <img
             src={image}
             alt={title}
-            className="relative h-20 w-full rounded-xl object-cover sm:h-24"
+            className="relative h-28 w-full object-cover sm:h-32"
           />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/35 to-transparent" />
         </div>
         <div className="mt-6 flex items-start justify-between gap-4">
           <div>
@@ -391,8 +400,41 @@ function ProductFeatureCard({
   );
 }
 
+function InsightCard({
+  title,
+  text,
+  delay = 0,
+  value,
+  className = ""
+}: {
+  title: string;
+  text: string;
+  delay?: number;
+  value?: string;
+  className?: string;
+}) {
+  return (
+    <RevealCard delay={delay}>
+      <div
+        className={`rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.32))] p-5 shadow-cinematic backdrop-blur-sm ${className}`}
+      >
+        {value ? (
+          <p className="text-4xl font-light tracking-[-0.05em] sm:text-5xl" style={{ color: primaryText }}>
+            {value}
+          </p>
+        ) : null}
+        <h3 className={`${value ? "mt-4" : ""} text-xl sm:text-2xl`} style={{ color: primaryText }}>
+          {title}
+        </h3>
+        <p className="mt-2 max-w-[32ch] text-sm leading-relaxed text-gray-400">{text}</p>
+      </div>
+    </RevealCard>
+  );
+}
+
 function EditorialImageCard({
   src,
+  videoSrc,
   alt,
   eyebrow,
   title,
@@ -401,6 +443,7 @@ function EditorialImageCard({
   imageClassName = ""
 }: {
   src: string;
+  videoSrc?: string;
   alt: string;
   eyebrow: string;
   title: string;
@@ -413,17 +456,32 @@ function EditorialImageCard({
       <div
         className={`group relative overflow-hidden rounded-[1.75rem] border border-white/5 bg-[#111111] shadow-cinematic ${className}`}
       >
+        {videoSrc ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            aria-hidden="true"
+            className={`absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
+            src={videoSrc}
+          />
+        ) : null}
         <img
           src={src}
           alt={alt}
-          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
+          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${
+            videoSrc ? "mix-blend-screen opacity-55" : ""
+          } ${imageClassName}`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/15 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
+        <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+          <div className="max-w-md rounded-[1.35rem] border border-white/8 bg-black/40 p-4 backdrop-blur-md">
           <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">{eyebrow}</p>
           <p className="mt-2 max-w-[18ch] text-xl leading-tight sm:text-2xl" style={{ color: primaryText }}>
             {title}
           </p>
+          </div>
         </div>
       </div>
     </RevealCard>
@@ -628,38 +686,26 @@ export default function HomePage() {
           <div className="mt-10 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
               src={deckImages.problem}
+              videoSrc={sectionMotionVideos.problem}
               alt="A creator overwhelmed by traditional 3D production tooling."
               eyebrow="Production Friction"
               title="Great ideas lose force when the workflow becomes the obstacle."
               className="min-h-[320px]"
+              imageClassName="object-center"
             />
             <div className="grid gap-4">
-              <RevealCard delay={0}>
-                <div className="rounded-[1.75rem] border border-white/5 bg-black/60 p-6 text-left">
-                  <p className="text-4xl sm:text-5xl" style={{ color: primaryText }}>
-                    3-6 weeks
-                  </p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.2em] text-gray-500">Per shot</p>
-                  <p className="mt-5 max-w-sm text-sm leading-relaxed text-gray-400">
-                    Manual environment building, lighting, motion, and iteration cycles stall the
-                    creative process.
-                  </p>
-                </div>
-              </RevealCard>
-              <RevealCard delay={0.15}>
-                <div className="rounded-[1.75rem] border border-white/5 bg-black/60 p-6 text-left">
-                  <p className="text-4xl sm:text-5xl" style={{ color: primaryText }}>
-                    $15k+
-                  </p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.2em] text-gray-500">
-                    Minimum cost
-                  </p>
-                  <p className="mt-5 max-w-sm text-sm leading-relaxed text-gray-400">
-                    Traditional pipelines price out indie creators and compress experimentation into
-                    a narrow, risky window.
-                  </p>
-                </div>
-              </RevealCard>
+              <InsightCard
+                delay={0}
+                value="3-6 weeks"
+                title="Per shot"
+                text="Manual environment building, lighting, motion, and iteration cycles stall the creative process."
+              />
+              <InsightCard
+                delay={0.15}
+                value="$15k+"
+                title="Minimum cost"
+                text="Traditional pipelines price out indie creators and compress experimentation into a narrow, risky window."
+              />
             </div>
           </div>
           </div>
@@ -667,7 +713,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="solution">
-        <div className="grid items-end gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_340px] xl:items-start">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
               <SectionBackdrop
@@ -694,38 +740,64 @@ export default function HomePage() {
                   />
                 </div>
               </SectionHeader>
-              <p className="max-w-2xl text-sm leading-relaxed text-primary/70 sm:text-base">
-                The product removes weeks of manual production overhead without removing directorial
-                control. Scenes stay editable, exportable, and production-usable.
-              </p>
+              <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start">
+                <div className="rounded-[1.6rem] border border-white/8 bg-black/35 p-5 backdrop-blur-md sm:p-6">
+                  <p className="max-w-[34rem] text-sm leading-relaxed text-primary/78 sm:text-base">
+                    The product removes weeks of manual production overhead without removing directorial
+                    control. Scenes stay editable, exportable, and production-usable from the first prompt.
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-3">
+                    {["Prompt-first", "Production-ready", "Director-controlled"].map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-xs uppercase tracking-[0.18em] text-primary/80"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-[1.6rem] border border-white/8 bg-black/40 p-5 backdrop-blur-md">
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-primary">Outcome</p>
+                  <p className="mt-4 text-5xl font-light tracking-[-0.06em]" style={{ color: primaryText }}>
+                    Minutes
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-400">
+                    Replace multi-week 3D pipelines with an AI-native workflow that still exports cleanly to production.
+                  </p>
+                </div>
+              </div>
               <div className="mt-8">
                 <EditorialImageCard
                   src={deckImages.solution}
+                  videoSrc={sectionMotionVideos.solution}
                   alt="An abstract visual showing disorder transformed into a clean AI-assisted 3D workflow."
                   eyebrow="Workflow Shift"
                   title="Move from production chaos to structured, editable scene generation."
                   delay={0.15}
-                  className="min-h-[260px]"
+                  className="min-h-[320px]"
+                  imageClassName="object-center"
                 />
               </div>
               </div>
             </div>
           </RevealCard>
           <div className="grid gap-4">
-            {[
-              ["10-100x faster", "Weeks of manual work compressed to minutes."],
-              ["Fractional cost", "No render farms or specialized teams needed."],
-              ["Full editability", "Creative control stays entirely with the director."]
-            ].map(([title, text], index) => (
-              <RevealCard delay={0.12 * (index + 1)} key={title}>
-                <div className="rounded-[1.75rem] bg-[#111111] p-6">
-                  <h3 className="text-2xl" style={{ color: primaryText }}>
-                    {title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-400">{text}</p>
-                </div>
-              </RevealCard>
-            ))}
+            <InsightCard
+              delay={0.12}
+              title="10-100x faster"
+              text="Weeks of manual work compressed to minutes, without breaking the creative loop."
+            />
+            <InsightCard
+              delay={0.24}
+              title="Fractional cost"
+              text="No render farms or specialized teams needed to get from concept to scene."
+            />
+            <InsightCard
+              delay={0.36}
+              title="Full editability"
+              text="Creative control stays with the director through export, iteration, and downstream production."
+            />
           </div>
         </div>
       </SectionShell>
@@ -740,7 +812,7 @@ export default function HomePage() {
           videoClassName="object-center"
           opacity={0.1}
         />
-        <div className="relative">
+        <div className="relative rounded-[2rem] border border-white/5 bg-black/25 p-5 shadow-cinematic backdrop-blur-[8px] sm:p-6 md:p-8">
           <SectionHeader
             index="04"
             label="Product"
@@ -764,7 +836,7 @@ export default function HomePage() {
             </div>
           </SectionHeader>
 
-          <div className="mt-10 grid gap-3 md:grid-cols-2 md:gap-2 lg:h-[480px] lg:grid-cols-4 lg:gap-1">
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_1fr_1fr_1fr] lg:gap-4">
             <RevealCard delay={0}>
               <div className="relative h-full min-h-[280px] overflow-hidden rounded-[1.75rem] bg-[#212121] shadow-cinematic">
                 <video
@@ -886,6 +958,7 @@ export default function HomePage() {
               <div className="mt-8">
                 <EditorialImageCard
                   src={deckImages.market}
+                  videoSrc={sectionMotionVideos.market}
                   alt="A global 3D visual illustrating market expansion and network growth."
                   eyebrow="Global Scale"
                   title="Demand is global, visual, and increasingly native to AI-first production."
@@ -1057,7 +1130,7 @@ export default function HomePage() {
                   {pricingTiers.map((tier, index) => (
                     <RevealCard key={tier.title} delay={0.08 * index}>
                       <div className="rounded-[1.5rem] bg-[#151515] p-5">
-                        <div className="flex items-end justify-between gap-4">
+                        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                           <div>
                             <p className="text-lg" style={{ color: primaryText }}>
                               {tier.title}
@@ -1170,6 +1243,7 @@ export default function HomePage() {
                 <div className="mb-6">
                   <EditorialImageCard
                     src={deckImages.ask}
+                    videoSrc={sectionMotionVideos.ask}
                     alt="A glowing rocket visual representing growth and competitive acceleration."
                     eyebrow="Scale Up"
                     title="Capital turns product velocity into durable market advantage."
@@ -1179,7 +1253,7 @@ export default function HomePage() {
                 </div>
                 <p className="text-xs uppercase tracking-[0.25em] text-primary">The Ask</p>
                 <p className="mt-4 text-6xl leading-none" style={{ color: primaryText }}>
-                  3M
+                  $3M
                 </p>
                 <p className="mt-2 text-lg text-gray-400">Seed Round</p>
                 <div className="mt-8 rounded-[1.5rem] border border-white/5 bg-[#0c0c0c] p-4">
