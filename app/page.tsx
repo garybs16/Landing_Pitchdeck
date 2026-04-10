@@ -186,26 +186,33 @@ function SectionHeader({
   children: React.ReactNode;
   center?: boolean;
 }) {
+  if (center) {
+    return (
+      <div className="mb-8 border-b border-white/5 pb-8">
+        <div className="grid gap-5 lg:grid-cols-[120px_minmax(0,1fr)] lg:items-start lg:gap-8">
+          <div className="text-center lg:text-left">
+            <SectionTag>{label}</SectionTag>
+            <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
+          </div>
+          <div className="min-w-0">
+            <div className="mx-auto max-w-5xl text-center">{children}</div>
+            <p className="mx-auto mt-6 max-w-[32rem] rounded-[1.35rem] border border-white/8 bg-black/35 px-5 py-4 text-center text-sm leading-relaxed text-gray-500 backdrop-blur-md">
+              {note}
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={`mb-8 grid gap-5 border-b border-white/5 pb-8 sm:gap-6 lg:gap-8 ${
-        center
-          ? "xl:grid-cols-[120px_minmax(0,1fr)] xl:items-end"
-          : "xl:grid-cols-[120px_minmax(0,1fr)_minmax(220px,260px)] xl:items-end"
-      }`}
-    >
-      <div className={center ? "text-center lg:text-left" : ""}>
+    <div className="mb-8 grid gap-5 border-b border-white/5 pb-8 sm:gap-6 lg:gap-8 xl:grid-cols-[120px_minmax(0,1fr)_minmax(220px,260px)] xl:items-end">
+      <div>
         <SectionTag>{label}</SectionTag>
         <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
       </div>
-      <div className={`min-w-0 ${center ? "text-center" : ""}`}>{children}</div>
-      <p
-        className={`max-w-[30ch] rounded-[1.35rem] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md ${
-          center
-            ? "mx-auto text-center xl:col-start-2 xl:mx-0 xl:justify-self-end xl:text-left"
-            : "xl:justify-self-end"
-        }`}
-      >
+      <div className="min-w-0">{children}</div>
+      <p className="max-w-[30ch] rounded-[1.35rem] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md xl:justify-self-end">
         {note}
       </p>
     </div>
