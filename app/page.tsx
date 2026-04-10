@@ -1,10 +1,8 @@
 "use client";
 
-import { AnimatedLetter } from "@/components/animated-letter";
 import { WordsPullUpMultiStyle } from "@/components/words-pull-up";
-import { motion, useInView, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, Check, X } from "lucide-react";
-import { useRef } from "react";
 
 const primaryText = "#E1E0CC";
 const heroVideo =
@@ -206,15 +204,17 @@ function SectionHeader({
   }
 
   return (
-    <div className="mb-8 grid gap-5 border-b border-white/5 pb-8 sm:gap-6 lg:gap-8 xl:grid-cols-[120px_minmax(0,1fr)_minmax(220px,260px)] xl:items-end">
+    <div className="mb-8 grid gap-5 border-b border-white/5 pb-8 sm:gap-6 lg:grid-cols-[120px_minmax(0,1fr)] lg:gap-8">
       <div>
         <SectionTag>{label}</SectionTag>
         <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
       </div>
-      <div className="min-w-0">{children}</div>
-      <p className="max-w-[30ch] rounded-[1.35rem] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md xl:justify-self-end">
-        {note}
-      </p>
+      <div className="min-w-0">
+        {children}
+        <p className="mt-6 max-w-[30rem] rounded-[1.35rem] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md lg:ml-auto">
+          {note}
+        </p>
+      </div>
     </div>
   );
 }
@@ -310,14 +310,10 @@ function RevealCard({
   children: React.ReactNode;
   delay?: number;
 }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px 0px -100px 0px" });
-
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0.95, y: 24 }}
-      animate={inView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 24 }}
+      initial={{ opacity: 0, scale: 0.97, y: 18 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
@@ -326,31 +322,15 @@ function RevealCard({
 }
 
 function ScrollRevealText({ text }: { text: string }) {
-  const ref = useRef<HTMLParagraphElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.8", "end 0.2"]
-  });
-
-  const chars = text.split("");
-
   return (
-    <p
-      ref={ref}
-      className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base"
+    <motion.p
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      className="mx-auto mt-8 max-w-4xl text-balance text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base"
     >
-      {chars.map((char, index) => {
-        const charProgress = index / chars.length;
-        return (
-          <AnimatedLetter
-            key={`${char}-${index}`}
-            char={char}
-            progress={scrollYProgress}
-            range={[charProgress - 0.1, charProgress + 0.05]}
-          />
-        );
-      })}
-    </p>
+      {text}
+    </motion.p>
   );
 }
 

@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 type WordsPullUpProps = {
   text: string;
@@ -54,12 +53,9 @@ export function WordsPullUp({
   justify = "start"
 }: WordsPullUpProps) {
   const words = text.split(" ").filter(Boolean);
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px -40px 0px" });
 
   return (
     <div
-      ref={ref}
       className={`text-balance inline-flex flex-wrap gap-x-[0.2em] gap-y-[0.05em] ${
         justify === "center" ? "justify-center" : "justify-start"
       }`}
@@ -70,8 +66,8 @@ export function WordsPullUp({
           <span key={`${word}-${index}`} className="overflow-hidden">
             <motion.span
               className={className}
-              initial={{ y: 20, opacity: 0 }}
-              animate={inView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
               transition={{ ...transition, delay: index * 0.08 }}
             >
               {renderWord(word, isLast && showAsterisk)}
@@ -88,8 +84,6 @@ export function WordsPullUpMultiStyle({
   className,
   justify = "center"
 }: WordsPullUpMultiStyleProps) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px -40px 0px" });
   const words = segments.flatMap((segment) =>
     segment.text
       .split(" ")
@@ -99,7 +93,6 @@ export function WordsPullUpMultiStyle({
 
   return (
     <div
-      ref={ref}
       className={`text-balance inline-flex flex-wrap gap-x-[0.25em] gap-y-[0.12em] ${
         justify === "center" ? "justify-center" : "justify-start"
       } ${className ?? ""}`}
@@ -108,8 +101,8 @@ export function WordsPullUpMultiStyle({
         <span key={`${word}-${index}`} className="overflow-hidden">
           <motion.span
             className={wordClassName}
-            initial={{ y: 20, opacity: 0 }}
-            animate={inView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+            initial={{ y: 12, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             transition={{ ...transition, delay: index * 0.08 }}
           >
             {word}
