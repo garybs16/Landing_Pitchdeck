@@ -2,7 +2,7 @@
 
 import { AnimatedLetter } from "@/components/animated-letter";
 import { WordsPullUpMultiStyle } from "@/components/words-pull-up";
-import { motion, useScroll } from "framer-motion";
+import { motion, useInView, useScroll } from "framer-motion";
 import { ArrowRight, Check, X } from "lucide-react";
 import { useRef } from "react";
 
@@ -11,6 +11,15 @@ const heroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 const productVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
+const sectionMotionVideos = {
+  problem: heroVideo,
+  solution: productVideo,
+  product: productVideo,
+  market: heroVideo,
+  competition: productVideo,
+  traction: heroVideo,
+  ask: productVideo
+};
 const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
   solution: "/prisma-media/solution-grid.svg",
@@ -58,7 +67,8 @@ const featureCards = [
   {
     number: "01",
     title: "Project Storyboard.",
-    image: "/prisma-media/thumb-storyboard.svg",
+    image:
+      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85",
     points: [
       "Input text prompts, sketches, or reference clips.",
       "Build scene intent before technical production starts.",
@@ -68,7 +78,8 @@ const featureCards = [
   {
     number: "02",
     title: "Smart Critiques.",
-    image: "/prisma-media/thumb-critiques.svg",
+    image:
+      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85",
     points: [
       "AI analysis surfaces visual weaknesses in seconds.",
       "Creative notes stay grounded in cinematic intent.",
@@ -78,7 +89,8 @@ const featureCards = [
   {
     number: "03",
     title: "Immersion Capsule.",
-    image: "/prisma-media/thumb-capsule.svg",
+    image:
+      "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85",
     points: [
       "Silence noisy notifications during active creation windows.",
       "Ambient soundscapes keep the workspace focused and calm.",
@@ -113,6 +125,7 @@ const comparisonRows = [
     state: ["good", "good", "good"]
   }
 ];
+const comparisonLabels = ["Speed", "3D Fidelity", "Editability"];
 
 const pricingTiers = [
   {
@@ -174,15 +187,15 @@ function SectionHeader({
   center?: boolean;
 }) {
   return (
-    <div className="mb-8 grid gap-6 border-b border-white/5 pb-8 lg:grid-cols-[150px_minmax(0,1fr)_240px] lg:items-end">
+    <div className="mb-8 grid gap-6 border-b border-white/5 pb-8 lg:grid-cols-[135px_minmax(0,1fr)_minmax(220px,260px)] lg:items-end lg:gap-8">
       <div className={center ? "text-center lg:text-left" : ""}>
         <SectionTag>{label}</SectionTag>
         <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
       </div>
-      <div className={center ? "text-center" : ""}>{children}</div>
+      <div className={`min-w-0 ${center ? "text-center" : ""}`}>{children}</div>
       <p
         className={`max-w-[28ch] text-sm leading-relaxed text-gray-500 ${
-          center ? "mx-auto text-center lg:ml-auto lg:mr-0 lg:text-left" : ""
+          center ? "mx-auto text-center lg:ml-auto lg:mr-0 lg:text-left" : "lg:justify-self-end"
         }`}
       >
         {note}
@@ -282,10 +295,14 @@ function RevealCard({
   children: React.ReactNode;
   delay?: number;
 }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-100px 0px -100px 0px" });
+
   return (
     <motion.div
-      initial={false}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
+      ref={ref}
+      initial={{ opacity: 0, scale: 0.95, y: 24 }}
+      animate={inView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 24 }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
@@ -415,17 +432,35 @@ function EditorialImageCard({
 
 function SectionBackdrop({
   src,
+  videoSrc,
   className = "",
   imageClassName = "",
+  videoClassName = "",
   opacity = 0.18
 }: {
   src: string;
+  videoSrc?: string;
   className?: string;
   imageClassName?: string;
+  videoClassName?: string;
   opacity?: number;
 }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+      {videoSrc ? (
+        <motion.video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className={`absolute inset-0 h-full w-full object-cover ${videoClassName}`}
+          style={{ opacity: Math.min(opacity + 0.04, 0.22) }}
+          initial={false}
+          animate={{ scale: [1.05, 1.09, 1.05], x: [0, 8, 0], y: [0, -6, 0] }}
+          transition={{ duration: 34, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
+          src={videoSrc}
+        />
+      ) : null}
       <motion.img
         src={src}
         alt=""
@@ -436,6 +471,7 @@ function SectionBackdrop({
         animate={{ scale: [1.02, 1.06, 1.02], x: [0, -12, 0], y: [0, 10, 0] }}
         transition={{ duration: 24, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
       />
+      <div className="bg-noise absolute inset-0 opacity-[0.12]" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/35 to-black/80" />
       <div className="cream-glow absolute -left-16 top-8 h-56 w-56 opacity-35" />
       <div className="cream-glow absolute bottom-0 right-0 h-64 w-64 opacity-25" />
@@ -557,7 +593,13 @@ export default function HomePage() {
 
       <SectionShell id="problem">
         <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] px-5 py-10 text-center shadow-cinematic sm:px-8 sm:py-14 md:px-12">
-          <SectionBackdrop src={deckImages.problem} imageClassName="object-right" opacity={0.16} />
+          <SectionBackdrop
+            src={deckImages.problem}
+            videoSrc={sectionMotionVideos.problem}
+            imageClassName="object-right"
+            videoClassName="object-center blur-[0.2px]"
+            opacity={0.16}
+          />
           <div className="absolute inset-0 deck-grid opacity-[0.06]" />
           <div className="relative z-10">
           <SectionHeader
@@ -628,7 +670,13 @@ export default function HomePage() {
         <div className="grid items-end gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
-              <SectionBackdrop src={deckImages.solution} imageClassName="object-center" opacity={0.14} />
+              <SectionBackdrop
+                src={deckImages.solution}
+                videoSrc={sectionMotionVideos.solution}
+                imageClassName="object-center"
+                videoClassName="object-center"
+                opacity={0.14}
+              />
               <div className="relative z-10">
               <SectionHeader
                 index="03"
@@ -684,7 +732,14 @@ export default function HomePage() {
 
       <SectionShell id="product" className="relative overflow-hidden">
         <div className="bg-noise absolute inset-0 opacity-[0.15]" />
-        <SectionBackdrop src={deckImages.product} className="rounded-[2rem]" imageClassName="object-center" opacity={0.1} />
+        <SectionBackdrop
+          src={deckImages.product}
+          videoSrc={sectionMotionVideos.product}
+          className="rounded-[2rem]"
+          imageClassName="object-center"
+          videoClassName="object-center"
+          opacity={0.1}
+        />
         <div className="relative">
           <SectionHeader
             index="04"
@@ -765,7 +820,13 @@ export default function HomePage() {
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
-              <SectionBackdrop src={deckImages.market} imageClassName="object-right" opacity={0.12} />
+              <SectionBackdrop
+                src={deckImages.market}
+                videoSrc={sectionMotionVideos.market}
+                imageClassName="object-right"
+                videoClassName="object-[52%_42%]"
+                opacity={0.12}
+              />
               <div className="relative z-10">
               <SectionHeader
                 index="05"
@@ -803,7 +864,13 @@ export default function HomePage() {
           </RevealCard>
           <RevealCard delay={0.2}>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 sm:p-8">
-              <SectionBackdrop src={deckImages.market} imageClassName="object-left" opacity={0.11} />
+              <SectionBackdrop
+                src={deckImages.market}
+                videoSrc={sectionMotionVideos.market}
+                imageClassName="object-left"
+                videoClassName="object-[35%_45%]"
+                opacity={0.11}
+              />
               <div className="relative z-10">
               <SectionTag>Why Now</SectionTag>
               <div className="mt-6 space-y-6">
@@ -834,7 +901,13 @@ export default function HomePage() {
 
       <SectionShell id="competition">
         <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
-          <SectionBackdrop src={deckImages.competition} imageClassName="object-center" opacity={0.12} />
+          <SectionBackdrop
+            src={deckImages.competition}
+            videoSrc={sectionMotionVideos.competition}
+            imageClassName="object-center"
+            videoClassName="object-center"
+            opacity={0.12}
+          />
           <div className="relative z-10">
           <SectionHeader
             index="06"
@@ -869,7 +942,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="mt-8 overflow-hidden rounded-[1.5rem] border border-white/5">
-            <div className="grid grid-cols-[1.1fr_1fr_1fr_1fr] bg-black/80 px-4 py-3 text-xs uppercase tracking-[0.2em] text-gray-500 sm:px-6">
+            <div className="hidden grid-cols-[1.1fr_1fr_1fr_1fr] bg-black/80 px-6 py-3 text-xs uppercase tracking-[0.2em] text-gray-500 md:grid">
               <p>Category</p>
               <p>Speed</p>
               <p>3D Fidelity</p>
@@ -878,7 +951,7 @@ export default function HomePage() {
             {comparisonRows.map((row, index) => (
               <RevealCard delay={0.12 * index} key={row.category}>
                 <div
-                  className={`grid grid-cols-1 gap-4 border-t border-white/5 px-4 py-5 sm:grid-cols-[1.1fr_1fr_1fr_1fr] sm:px-6 ${
+                  className={`grid grid-cols-1 gap-4 border-t border-white/5 px-4 py-5 md:grid-cols-[1.1fr_1fr_1fr_1fr] md:px-6 ${
                     row.category === "UnstableML"
                       ? "bg-[linear-gradient(90deg,rgba(222,219,200,0.12),rgba(12,12,12,0.94)_44%)]"
                       : "bg-[#0c0c0c]"
@@ -893,7 +966,11 @@ export default function HomePage() {
                   {[row.speed, row.fidelity, row.editability].map((value, itemIndex) => {
                     const good = row.state[itemIndex] === "good";
                     return (
-                      <div key={value} className="flex items-start gap-3">
+                      <div key={value} className="space-y-1.5">
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 md:hidden">
+                          {comparisonLabels[itemIndex]}
+                        </p>
+                        <div className="flex items-start gap-3">
                         <span
                           className={`mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full ${
                             good ? "bg-primary text-black" : "border border-white/10 text-gray-500"
@@ -902,6 +979,7 @@ export default function HomePage() {
                           {good ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
                         </span>
                         <p className="text-sm leading-relaxed text-gray-400">{value}</p>
+                        </div>
                       </div>
                     );
                   })}
@@ -917,7 +995,13 @@ export default function HomePage() {
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
-              <SectionBackdrop src={deckImages.traction} imageClassName="object-center" opacity={0.14} />
+              <SectionBackdrop
+                src={deckImages.traction}
+                videoSrc={sectionMotionVideos.traction}
+                imageClassName="object-center"
+                videoClassName="object-center"
+                opacity={0.14}
+              />
               <div className="relative z-10">
               <SectionHeader
                 index="07"
@@ -960,7 +1044,13 @@ export default function HomePage() {
           <div className="grid gap-6">
             <RevealCard delay={0.1}>
               <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6">
-                <SectionBackdrop src={deckImages.traction} imageClassName="object-right" opacity={0.1} />
+                <SectionBackdrop
+                  src={deckImages.traction}
+                  videoSrc={sectionMotionVideos.traction}
+                  imageClassName="object-right"
+                  videoClassName="object-right"
+                  opacity={0.1}
+                />
                 <div className="relative z-10">
                 <SectionTag>Model</SectionTag>
                 <div className="mt-6 grid gap-4">
@@ -989,7 +1079,13 @@ export default function HomePage() {
             </RevealCard>
             <RevealCard delay={0.2}>
               <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6">
-                <SectionBackdrop src={deckImages.traction} imageClassName="object-left" opacity={0.08} />
+                <SectionBackdrop
+                  src={deckImages.traction}
+                  videoSrc={sectionMotionVideos.traction}
+                  imageClassName="object-left"
+                  videoClassName="object-left"
+                  opacity={0.08}
+                />
                 <div className="relative z-10">
                 <SectionTag>Fund Allocation</SectionTag>
                 <div className="mt-6 space-y-4">
@@ -1017,7 +1113,13 @@ export default function HomePage() {
 
       <SectionShell id="team-ask" className="pb-20">
         <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
-          <SectionBackdrop src={deckImages.ask} imageClassName="object-center" opacity={0.12} />
+          <SectionBackdrop
+            src={deckImages.ask}
+            videoSrc={sectionMotionVideos.ask}
+            imageClassName="object-center"
+            videoClassName="object-center"
+            opacity={0.12}
+          />
           <div className="relative z-10">
           <SectionHeader
             index="08"
