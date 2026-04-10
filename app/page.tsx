@@ -3,7 +3,7 @@
 import { AnimatedLetter } from "@/components/animated-letter";
 import { WordsPullUpMultiStyle } from "@/components/words-pull-up";
 import { motion, useScroll } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, X } from "lucide-react";
 import { useRef } from "react";
 
 const primaryText = "#E1E0CC";
@@ -15,7 +15,10 @@ const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
   solution: "/prisma-media/solution-grid.svg",
   market: "/prisma-media/market-globe.svg",
-  ask: "/prisma-media/ask-ascent.svg"
+  ask: "/prisma-media/ask-ascent.svg",
+  product: "/prisma-media/product-ribbon.svg",
+  competition: "/prisma-media/competition-matrix.svg",
+  traction: "/prisma-media/traction-signal.svg"
 };
 
 const navItems = [
@@ -410,6 +413,36 @@ function EditorialImageCard({
   );
 }
 
+function SectionBackdrop({
+  src,
+  className = "",
+  imageClassName = "",
+  opacity = 0.18
+}: {
+  src: string;
+  className?: string;
+  imageClassName?: string;
+  opacity?: number;
+}) {
+  return (
+    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+      <motion.img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        className={`h-full w-full object-cover ${imageClassName}`}
+        style={{ opacity }}
+        initial={false}
+        animate={{ scale: [1.02, 1.06, 1.02], x: [0, -12, 0], y: [0, 10, 0] }}
+        transition={{ duration: 24, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/35 to-black/80" />
+      <div className="cream-glow absolute -left-16 top-8 h-56 w-56 opacity-35" />
+      <div className="cream-glow absolute bottom-0 right-0 h-64 w-64 opacity-25" />
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <main className="relative bg-black">
@@ -523,7 +556,10 @@ export default function HomePage() {
       </section>
 
       <SectionShell id="problem">
-        <div className="rounded-[2rem] bg-[#101010] px-5 py-10 text-center shadow-cinematic sm:px-8 sm:py-14 md:px-12">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] px-5 py-10 text-center shadow-cinematic sm:px-8 sm:py-14 md:px-12">
+          <SectionBackdrop src={deckImages.problem} imageClassName="object-right" opacity={0.16} />
+          <div className="absolute inset-0 deck-grid opacity-[0.06]" />
+          <div className="relative z-10">
           <SectionHeader
             index="02"
             label="Problem"
@@ -584,13 +620,16 @@ export default function HomePage() {
               </RevealCard>
             </div>
           </div>
+          </div>
         </div>
       </SectionShell>
 
       <SectionShell id="solution">
         <div className="grid items-end gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <RevealCard delay={0}>
-            <div className="rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
+              <SectionBackdrop src={deckImages.solution} imageClassName="object-center" opacity={0.14} />
+              <div className="relative z-10">
               <SectionHeader
                 index="03"
                 label="Solution"
@@ -621,6 +660,7 @@ export default function HomePage() {
                   className="min-h-[260px]"
                 />
               </div>
+              </div>
             </div>
           </RevealCard>
           <div className="grid gap-4">
@@ -644,6 +684,7 @@ export default function HomePage() {
 
       <SectionShell id="product" className="relative overflow-hidden">
         <div className="bg-noise absolute inset-0 opacity-[0.15]" />
+        <SectionBackdrop src={deckImages.product} className="rounded-[2rem]" imageClassName="object-center" opacity={0.1} />
         <div className="relative">
           <SectionHeader
             index="04"
@@ -723,7 +764,9 @@ export default function HomePage() {
       <SectionShell id="market">
         <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
           <RevealCard delay={0}>
-            <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
+              <SectionBackdrop src={deckImages.market} imageClassName="object-right" opacity={0.12} />
+              <div className="relative z-10">
               <SectionHeader
                 index="05"
                 label="Market"
@@ -755,10 +798,13 @@ export default function HomePage() {
                   </RevealCard>
                 ))}
               </div>
+              </div>
             </div>
           </RevealCard>
           <RevealCard delay={0.2}>
-            <div className="rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 sm:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 sm:p-8">
+              <SectionBackdrop src={deckImages.market} imageClassName="object-left" opacity={0.11} />
+              <div className="relative z-10">
               <SectionTag>Why Now</SectionTag>
               <div className="mt-6 space-y-6">
                 {whyNow.map((item) => (
@@ -780,13 +826,16 @@ export default function HomePage() {
                   className="min-h-[250px]"
                 />
               </div>
+              </div>
             </div>
           </RevealCard>
         </div>
       </SectionShell>
 
       <SectionShell id="competition">
-        <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
+          <SectionBackdrop src={deckImages.competition} imageClassName="object-center" opacity={0.12} />
+          <div className="relative z-10">
           <SectionHeader
             index="06"
             label="Competition"
@@ -846,11 +895,11 @@ export default function HomePage() {
                     return (
                       <div key={value} className="flex items-start gap-3">
                         <span
-                          className={`mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full text-xs ${
+                          className={`mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full ${
                             good ? "bg-primary text-black" : "border border-white/10 text-gray-500"
                           }`}
                         >
-                          {good ? "✓" : "✕"}
+                          {good ? <Check className="h-3 w-3" /> : <X className="h-3 w-3" />}
                         </span>
                         <p className="text-sm leading-relaxed text-gray-400">{value}</p>
                       </div>
@@ -860,13 +909,16 @@ export default function HomePage() {
               </RevealCard>
             ))}
           </div>
+          </div>
         </div>
       </SectionShell>
 
       <SectionShell id="traction">
         <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <RevealCard delay={0}>
-            <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
+            <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
+              <SectionBackdrop src={deckImages.traction} imageClassName="object-center" opacity={0.14} />
+              <div className="relative z-10">
               <SectionHeader
                 index="07"
                 label="Traction"
@@ -902,11 +954,14 @@ export default function HomePage() {
               <div className="mt-6">
                 <DataBars title="Monthly Demand Signal" bars={growthBars} />
               </div>
+              </div>
             </div>
           </RevealCard>
           <div className="grid gap-6">
             <RevealCard delay={0.1}>
-              <div className="rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6">
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6">
+                <SectionBackdrop src={deckImages.traction} imageClassName="object-right" opacity={0.1} />
+                <div className="relative z-10">
                 <SectionTag>Model</SectionTag>
                 <div className="mt-6 grid gap-4">
                   {pricingTiers.map((tier, index) => (
@@ -929,10 +984,13 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="mt-5 text-sm text-primary/75">$0.05 / render minute usage-based compute</p>
+                </div>
               </div>
             </RevealCard>
             <RevealCard delay={0.2}>
-              <div className="rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6">
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6">
+                <SectionBackdrop src={deckImages.traction} imageClassName="object-left" opacity={0.08} />
+                <div className="relative z-10">
                 <SectionTag>Fund Allocation</SectionTag>
                 <div className="mt-6 space-y-4">
                   {askBars.map((item) => (
@@ -950,6 +1008,7 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
+                </div>
               </div>
             </RevealCard>
           </div>
@@ -957,7 +1016,9 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="team-ask" className="pb-20">
-        <div className="rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
+        <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
+          <SectionBackdrop src={deckImages.ask} imageClassName="object-center" opacity={0.12} />
+          <div className="relative z-10">
           <SectionHeader
             index="08"
             label="Team & Ask"
@@ -1051,6 +1112,7 @@ export default function HomePage() {
                 </div>
               </div>
             </RevealCard>
+          </div>
           </div>
         </div>
       </SectionShell>
