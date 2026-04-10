@@ -3,6 +3,7 @@
 import { WordsPullUpMultiStyle } from "@/components/words-pull-up";
 import { motion } from "framer-motion";
 import { ArrowRight, Check, X } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const primaryText = "#E1E0CC";
 const heroVideo =
@@ -450,6 +451,7 @@ function EditorialImageCard({
             muted
             playsInline
             aria-hidden="true"
+            preload="auto"
             className={`absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
             src={videoSrc}
           />
@@ -498,6 +500,7 @@ function SectionBackdrop({
           loop
           muted
           playsInline
+          preload="auto"
           className={`absolute inset-0 h-full w-full object-cover ${videoClassName}`}
           style={{ opacity: Math.min(opacity + 0.04, 0.22) }}
           initial={false}
@@ -525,15 +528,47 @@ function SectionBackdrop({
 }
 
 export default function HomePage() {
+  const heroVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) {
+      return;
+    }
+
+    const ensurePlayback = () => {
+      const playAttempt = video.play();
+      if (playAttempt && typeof playAttempt.catch === "function") {
+        playAttempt.catch(() => {});
+      }
+    };
+
+    ensurePlayback();
+
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") {
+        ensurePlayback();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibility);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
+  }, []);
+
   return (
     <main className="relative bg-black">
       <section className="h-screen p-4 md:p-6">
         <div className="relative h-full overflow-hidden rounded-2xl bg-black shadow-cinematic md:rounded-[2rem]">
           <video
+            ref={heroVideoRef}
             autoPlay
             loop
             muted
             playsInline
+            preload="auto"
             className="absolute inset-0 h-full w-full object-cover"
             src={heroVideo}
           />
@@ -831,6 +866,7 @@ export default function HomePage() {
                   loop
                   muted
                   playsInline
+                  preload="auto"
                   className="absolute inset-0 h-full w-full object-cover"
                   src={productVideo}
                 />
