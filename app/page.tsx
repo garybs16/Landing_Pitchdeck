@@ -318,13 +318,19 @@ function RevealCard({
   );
 }
 
-function ScrollRevealText({ text }: { text: string }) {
+function ScrollRevealText({
+  text,
+  className = ""
+}: {
+  text: string;
+  className?: string;
+}) {
   return (
     <motion.p
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto mt-8 max-w-2xl px-4 text-balance text-center text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base"
+      className={`mx-auto max-w-2xl px-4 text-balance text-center text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base ${className}`}
     >
       {text}
     </motion.p>
@@ -700,7 +706,12 @@ export default function HomePage() {
               />
             </div>
           </SectionHeader>
-          <ScrollRevealText text="Crushing delays kill creative momentum, while high minimum production costs keep ambitious stories locked behind specialist teams and expensive pipelines." />
+          <div className="mt-8 flex justify-center">
+            <ScrollRevealText
+              text="Crushing delays kill creative momentum, while high minimum production costs keep ambitious stories locked behind specialist teams and expensive pipelines."
+              className="mt-0 max-w-3xl"
+            />
+          </div>
           <div className="mt-10 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
               src={deckImages.problem}
