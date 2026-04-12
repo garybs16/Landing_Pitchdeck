@@ -188,17 +188,13 @@ function SectionHeader({
   if (center) {
     return (
       <div className="mb-8 border-b border-white/5 pb-8">
-        <div className="grid gap-5 lg:grid-cols-[120px_minmax(0,1fr)] lg:items-start lg:gap-8">
-          <div className="text-center lg:text-left">
-            <SectionTag>{label}</SectionTag>
-            <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
-          </div>
-          <div className="min-w-0">
-            <div className="mx-auto max-w-5xl text-center">{children}</div>
-            <p className="mx-auto mt-6 max-w-[32rem] rounded-[1.35rem] border border-white/8 bg-black/35 px-5 py-4 text-center text-sm leading-relaxed text-gray-500 backdrop-blur-md">
-              {note}
-            </p>
-          </div>
+        <div className="mx-auto max-w-5xl text-center px-4">
+          <SectionTag>{label}</SectionTag>
+          <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
+          <div className="mx-auto mt-6 max-w-4xl">{children}</div>
+          <p className="mx-auto mt-6 max-w-[32rem] rounded-[1.35rem] border border-white/8 bg-black/35 px-5 py-4 text-center text-sm leading-relaxed text-gray-500 backdrop-blur-md">
+            {note}
+          </p>
         </div>
       </div>
     );
@@ -328,7 +324,7 @@ function ScrollRevealText({ text }: { text: string }) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto mt-8 max-w-3xl text-balance text-center text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base"
+      className="mx-auto mt-8 max-w-2xl px-4 text-balance text-center text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base"
     >
       {text}
     </motion.p>
