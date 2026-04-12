@@ -416,7 +416,9 @@ function InsightCard({
         <h3 className={`${value ? "mt-4" : ""} text-xl sm:text-2xl`} style={{ color: primaryText }}>
           {title}
         </h3>
-        <p className="mt-2 max-w-[32ch] text-sm leading-relaxed text-gray-400">{text}</p>
+        <p className="mx-auto mt-2 max-w-[32ch] text-center text-sm leading-relaxed text-gray-400">
+          {text}
+        </p>
       </div>
     </RevealCard>
   );
