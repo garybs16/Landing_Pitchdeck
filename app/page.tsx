@@ -432,7 +432,9 @@ function EditorialImageCard({
   title,
   delay = 0,
   className = "",
-  imageClassName = ""
+  imageClassName = "",
+  contentClassName = "",
+  titleClassName = ""
 }: {
   src: string;
   videoSrc?: string;
@@ -442,6 +444,8 @@ function EditorialImageCard({
   delay?: number;
   className?: string;
   imageClassName?: string;
+  contentClassName?: string;
+  titleClassName?: string;
 }) {
   return (
     <RevealCard delay={delay}>
@@ -469,9 +473,14 @@ function EditorialImageCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-          <div className="max-w-md rounded-[1.35rem] border border-white/8 bg-black/40 p-4 backdrop-blur-md">
+          <div
+            className={`max-w-md rounded-[1.35rem] border border-white/8 bg-black/40 p-4 backdrop-blur-md ${contentClassName}`}
+          >
           <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">{eyebrow}</p>
-          <p className="mt-2 max-w-[18ch] text-xl leading-tight sm:text-2xl" style={{ color: primaryText }}>
+          <p
+            className={`mt-2 max-w-[18ch] text-xl leading-tight sm:text-2xl ${titleClassName}`}
+            style={{ color: primaryText }}
+          >
             {title}
           </p>
           </div>
@@ -725,6 +734,8 @@ export default function HomePage() {
               title="Great ideas lose force when the workflow becomes the obstacle."
               className="min-h-[320px]"
               imageClassName="object-center"
+              contentClassName="mx-auto max-w-[28rem] text-center"
+              titleClassName="max-w-none"
             />
             <div className="grid gap-4">
               <InsightCard
