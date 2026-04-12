@@ -571,7 +571,7 @@ export default function HomePage() {
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-[44%_38%] md:object-[46%_36%] lg:object-[48%_34%]"
             src={heroVideo}
           />
           <div className="cream-glow absolute left-[12%] top-[14%] h-72 w-72 opacity-60" />
@@ -707,10 +707,12 @@ export default function HomePage() {
             </div>
           </SectionHeader>
           <div className="mt-8 flex justify-center">
-            <ScrollRevealText
-              text="Crushing delays kill creative momentum, while high minimum production costs keep ambitious stories locked behind specialist teams and expensive pipelines."
-              className="mt-0 max-w-3xl"
-            />
+            <div className="w-full max-w-3xl rounded-[1.35rem] border border-white/6 bg-black/20 px-4 py-4 backdrop-blur-sm sm:px-6">
+              <ScrollRevealText
+                text="Crushing delays kill creative momentum, while high minimum production costs keep ambitious stories locked behind specialist teams and expensive pipelines."
+                className="mt-0 max-w-[42rem]"
+              />
+            </div>
           </div>
           <div className="mt-10 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
