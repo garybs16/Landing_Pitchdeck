@@ -406,7 +406,7 @@ function InsightCard({
   return (
     <RevealCard delay={delay}>
       <div
-        className={`rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.32))] p-5 shadow-cinematic backdrop-blur-sm ${className}`}
+        className={`rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.32))] p-5 text-center shadow-cinematic backdrop-blur-sm ${className}`}
       >
         {value ? (
           <p className="text-4xl font-light tracking-[-0.05em] sm:text-5xl" style={{ color: primaryText }}>
@@ -616,7 +616,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end">
-              <div className="flex flex-col justify-end lg:pb-8">
+              <div className="flex flex-col justify-end pb-4 lg:pb-10">
                 <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
                   Unstable ML
                 </p>
@@ -624,7 +624,7 @@ export default function HomePage() {
                   Generate cinematic 3D scenes from text in seconds.
                 </p>
                 <div
-                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[18vw] sm:text-[14vw] md:text-[12vw] lg:text-[9.2vw] xl:text-[8.4vw]"
+                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[16vw] sm:text-[13vw] md:text-[10.8vw] lg:text-[8.2vw] xl:text-[7.4vw]"
                   style={{ color: primaryText }}
                 >
                   <span className="block lg:inline">
