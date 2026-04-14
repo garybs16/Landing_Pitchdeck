@@ -625,7 +625,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end 2xl:grid-cols-[minmax(0,1fr)_460px]">
-              <div className="flex flex-col justify-end pb-6 lg:pb-16 xl:pb-12 2xl:pb-14">
+              <div className="flex flex-col justify-end pb-4 lg:pb-10 2xl:pb-12">
                 <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
                   Unstable ML
                 </p>
@@ -633,7 +633,7 @@ export default function HomePage() {
                   Generate cinematic 3D scenes from text in seconds.
                 </p>
                 <div
-                  className="mt-6 font-medium leading-[0.84] tracking-[-0.08em] text-[clamp(3rem,6.8vw,8rem)]"
+                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[clamp(3.2rem,8vw,9rem)]"
                   style={{ color: primaryText }}
                 >
                   <span className="block lg:inline">
