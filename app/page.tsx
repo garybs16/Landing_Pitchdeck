@@ -187,12 +187,12 @@ function SectionHeader({
 }) {
   if (center) {
     return (
-      <div className="mb-8 border-b border-white/5 pb-8">
-        <div className="mx-auto max-w-5xl text-center px-4">
+      <div className="mb-10 border-b border-white/5 pb-10 sm:mb-12 sm:pb-12">
+        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
           <SectionTag>{label}</SectionTag>
           <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
           <div className="mx-auto mt-6 max-w-4xl">{children}</div>
-          <p className="mx-auto mt-6 max-w-[32rem] rounded-[1.35rem] border border-white/8 bg-black/35 px-5 py-4 text-center text-sm leading-relaxed text-gray-500 backdrop-blur-md">
+          <p className="mx-auto mt-7 max-w-[34rem] rounded-[1.5rem] border border-white/8 bg-black/35 px-6 py-4 text-center text-sm leading-relaxed text-gray-500 backdrop-blur-md lg:max-w-[38rem]">
             {note}
           </p>
         </div>
@@ -201,14 +201,14 @@ function SectionHeader({
   }
 
   return (
-    <div className="mb-8 grid gap-5 border-b border-white/5 pb-8 sm:gap-6 lg:grid-cols-[120px_minmax(0,1fr)] lg:gap-8">
+    <div className="mb-10 grid gap-5 border-b border-white/5 pb-10 sm:mb-12 sm:gap-6 sm:pb-12 lg:grid-cols-[132px_minmax(0,1fr)] lg:gap-10">
       <div>
         <SectionTag>{label}</SectionTag>
         <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
       </div>
       <div className="min-w-0">
         {children}
-        <p className="mt-6 max-w-[30rem] rounded-[1.35rem] border border-white/8 bg-black/35 px-4 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md lg:ml-auto">
+        <p className="mt-7 max-w-[31rem] rounded-[1.5rem] border border-white/8 bg-black/35 px-5 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md lg:ml-auto xl:max-w-[34rem]">
           {note}
         </p>
       </div>
@@ -218,7 +218,7 @@ function SectionHeader({
 
 function StatChip({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-sm">
+    <div className="min-w-[96px] rounded-full border border-white/10 bg-black/45 px-4 py-3 text-center backdrop-blur-sm">
       <p className="text-base font-semibold tracking-[-0.03em]" style={{ color: primaryText }}>
         {value}
       </p>
@@ -357,25 +357,25 @@ function ProductFeatureCard({
 }) {
   return (
     <RevealCard delay={delay}>
-      <div className="flex h-full min-h-[280px] flex-col rounded-[1.75rem] bg-[#212121] p-5 shadow-cinematic sm:p-6">
+      <div className="flex h-full min-h-[300px] flex-col rounded-[1.75rem] border border-white/5 bg-[#212121] p-5 shadow-cinematic sm:p-6">
         <div className="relative overflow-hidden rounded-[1.3rem] border border-white/5 bg-black/30">
           <div className="cream-glow absolute inset-0 opacity-50" />
           <img
             src={image}
             alt={title}
-            className="relative h-28 w-full object-cover sm:h-32"
+            className="relative h-[7.5rem] w-full object-cover sm:h-36"
           />
           <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/35 to-transparent" />
         </div>
         <div className="mt-6 flex items-start justify-between gap-4">
           <div>
             <p className="text-xs text-gray-500">{number}</p>
-            <h3 className="mt-1 text-xl" style={{ color: primaryText }}>
+            <h3 className="mt-1 text-xl sm:text-[1.35rem]" style={{ color: primaryText }}>
               {title}
             </h3>
           </div>
         </div>
-        <div className="mt-6 space-y-4">
+        <div className="mt-6 space-y-3.5">
           {points.map((point) => (
             <div key={point} className="flex items-start gap-3">
               <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -411,7 +411,7 @@ function InsightCard({
   return (
     <RevealCard delay={delay}>
       <div
-        className={`rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.32))] p-5 text-center shadow-cinematic backdrop-blur-sm ${className}`}
+        className={`flex h-full min-h-[210px] flex-col justify-center rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.32))] p-6 text-center shadow-cinematic backdrop-blur-sm sm:p-7 ${className}`}
       >
         {value ? (
           <p className="text-4xl font-light tracking-[-0.05em] sm:text-5xl" style={{ color: primaryText }}>
@@ -479,15 +479,15 @@ function EditorialImageCard({
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
           <div
-            className={`max-w-md rounded-[1.35rem] border border-white/8 bg-black/40 p-4 backdrop-blur-md ${contentClassName}`}
+            className={`max-w-md rounded-[1.45rem] border border-white/8 bg-black/40 p-4 backdrop-blur-md sm:p-5 ${contentClassName}`}
           >
-          <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">{eyebrow}</p>
-          <p
-            className={`mt-2 max-w-[18ch] text-xl leading-tight sm:text-2xl ${titleClassName}`}
-            style={{ color: primaryText }}
-          >
-            {title}
-          </p>
+            <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">{eyebrow}</p>
+            <p
+              className={`mt-2 max-w-[18ch] text-xl leading-tight sm:text-2xl ${titleClassName}`}
+              style={{ color: primaryText }}
+            >
+              {title}
+            </p>
           </div>
         </div>
       </div>
@@ -730,7 +730,7 @@ export default function HomePage() {
               />
             </div>
           </div>
-          <div className="mt-10 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="mt-10 grid gap-5 xl:gap-6 lg:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
               src={deckImages.problem}
               videoSrc={sectionMotionVideos.problem}
@@ -762,7 +762,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="solution">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_340px] xl:items-start">
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_360px] xl:items-start xl:gap-5">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
               <SectionBackdrop
@@ -789,7 +789,7 @@ export default function HomePage() {
                   />
                 </div>
               </SectionHeader>
-              <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start">
+              <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px] xl:items-start">
                 <div className="rounded-[1.6rem] border border-white/8 bg-black/35 p-5 backdrop-blur-md sm:p-6">
                   <p className="max-w-[34rem] text-sm leading-relaxed text-primary/78 sm:text-base">
                     The product removes weeks of manual production overhead without removing directorial
@@ -831,7 +831,7 @@ export default function HomePage() {
               </div>
             </div>
           </RevealCard>
-          <div className="grid gap-4">
+          <div className="grid gap-4 xl:gap-5">
             <InsightCard
               delay={0.12}
               title="10-100x faster"
@@ -885,7 +885,7 @@ export default function HomePage() {
             </div>
           </SectionHeader>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_1fr_1fr_1fr] lg:gap-4">
+          <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-[1.15fr_1fr_1fr_1fr] lg:gap-5">
             <RevealCard delay={0}>
               <div className="relative h-full min-h-[280px] overflow-hidden rounded-[1.75rem] bg-[#212121] shadow-cinematic">
                 <video
@@ -911,7 +911,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-3 lg:gap-5">
             {productSteps.map((step, index) => (
               <RevealCard key={step.number} delay={0.12 * index}>
                 <div className="rounded-[1.5rem] border border-white/5 bg-black/50 p-5">
@@ -939,7 +939,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="market">
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-7">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
               <SectionBackdrop
@@ -1115,7 +1115,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="traction">
-        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-7">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
               <SectionBackdrop
@@ -1259,7 +1259,7 @@ export default function HomePage() {
               />
             </div>
           </SectionHeader>
-          <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+          <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:gap-7">
             <div>
               <div className="grid gap-4 md:grid-cols-2">
                 {[
