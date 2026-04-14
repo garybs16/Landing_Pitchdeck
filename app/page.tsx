@@ -293,9 +293,14 @@ function SectionShell({
   className?: string;
 }) {
   return (
-    <section id={id} className={`relative isolate px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24 ${className}`}>
+    <section
+      id={id}
+      className={`relative isolate px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24 min-[2200px]:px-10 min-[2200px]:py-28 min-[3200px]:px-14 min-[3200px]:py-32 ${className}`}
+    >
       <div className="cream-glow pointer-events-none absolute left-1/2 top-0 h-48 w-[28rem] -translate-x-1/2 opacity-30" />
-      <div className="mx-auto w-full max-w-[1500px] 2xl:max-w-[1680px]">{children}</div>
+      <div className="mx-auto w-full max-w-[1500px] 2xl:max-w-[1680px] min-[2200px]:max-w-[1920px] min-[2800px]:max-w-[2280px] min-[3400px]:max-w-[2880px]">
+        {children}
+      </div>
     </section>
   );
 }
@@ -573,8 +578,8 @@ export default function HomePage() {
 
   return (
     <main className="relative bg-black">
-      <section className="h-screen p-4 md:p-6 2xl:p-8">
-        <div className="relative mx-auto h-full max-w-[2200px] overflow-hidden rounded-2xl bg-black shadow-cinematic md:rounded-[2rem]">
+      <section className="h-screen p-4 md:p-6 2xl:p-8 min-[2200px]:p-10 min-[3200px]:p-12">
+        <div className="relative mx-auto h-full w-full max-w-[2200px] overflow-hidden rounded-2xl bg-black shadow-cinematic md:rounded-[2rem] min-[2200px]:max-w-[2880px] min-[3200px]:max-w-[3600px]">
           <video
             ref={heroVideoRef}
             autoPlay
@@ -582,7 +587,7 @@ export default function HomePage() {
             muted
             playsInline
             preload="auto"
-            className="absolute inset-0 h-full w-full object-cover object-[44%_38%] md:object-[46%_36%] lg:object-[48%_34%]"
+            className="absolute inset-0 h-full w-full object-cover object-[44%_38%] md:object-[46%_36%] lg:object-[48%_34%] min-[2200px]:object-[49%_38%] min-[3200px]:object-[50%_40%]"
             src={heroVideo}
           />
           <div className="cream-glow absolute left-[12%] top-[14%] h-72 w-72 opacity-60" />
@@ -592,7 +597,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="vignette-overlay absolute inset-0" />
 
-          <div className="relative z-10 flex h-full flex-col p-4 sm:p-6 md:p-8 lg:p-10 2xl:p-12">
+          <div className="relative z-10 flex h-full flex-col p-4 sm:p-6 md:p-8 lg:p-10 2xl:p-12 min-[2200px]:p-14 min-[3200px]:p-16">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-sm">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-gray-500">Deck Format</p>
@@ -624,16 +629,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end 2xl:grid-cols-[minmax(0,1fr)_460px]">
-              <div className="flex flex-col justify-end pb-4 lg:pb-10 2xl:pb-12">
+            <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end 2xl:grid-cols-[minmax(0,1fr)_460px] min-[2200px]:grid-cols-[minmax(0,1.05fr)_560px] min-[3200px]:grid-cols-[minmax(0,1.08fr)_660px] min-[2200px]:gap-12">
+              <div className="flex flex-col justify-end pb-4 lg:pb-10 2xl:pb-12 min-[2200px]:pb-20 min-[3200px]:pb-24">
                 <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
                   Unstable ML
                 </p>
-                <p className="mt-4 max-w-xl font-serif text-[clamp(1.15rem,1.8vw,2.25rem)] italic text-primary/80">
+                <p className="mt-4 max-w-xl font-serif text-[clamp(1.15rem,1.8vw,2.25rem)] italic text-primary/80 min-[2200px]:max-w-[18ch] min-[2200px]:text-[clamp(1.6rem,1.5vw,2.9rem)] min-[3200px]:text-[clamp(2rem,1.45vw,3.35rem)]">
                   Generate cinematic 3D scenes from text in seconds.
                 </p>
                 <div
-                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[clamp(3.2rem,8vw,9rem)]"
+                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[clamp(3.2rem,8vw,9rem)] min-[2200px]:mt-8 min-[2200px]:text-[clamp(5rem,7vw,12rem)] min-[3200px]:text-[clamp(6rem,6.7vw,14.5rem)]"
                   style={{ color: primaryText }}
                 >
                   <span className="block lg:inline">
@@ -643,39 +648,39 @@ export default function HomePage() {
                     ML
                   </span>
                 </div>
-                <div className="mt-5 flex flex-wrap items-center gap-4">
-                  <span className="h-px w-20 bg-primary/40" />
-                  <p className="text-xs uppercase tracking-[0.28em] text-primary/70 sm:text-sm">
+                <div className="mt-5 flex flex-wrap items-center gap-4 min-[2200px]:mt-6 min-[2200px]:gap-5">
+                  <span className="h-px w-20 bg-primary/40 min-[2200px]:w-28" />
+                  <p className="text-xs uppercase tracking-[0.28em] text-primary/70 sm:text-sm min-[2200px]:text-base min-[3200px]:text-lg">
                     Cinematic text-to-3D infrastructure
                   </p>
                 </div>
               </div>
 
-              <div className="self-end rounded-[2rem] border border-white/10 bg-black/42 p-5 shadow-cinematic backdrop-blur-md sm:p-6">
-                <p className="max-w-md text-sm leading-[1.45] text-primary/70 md:text-base">
+              <div className="self-end rounded-[2rem] border border-white/10 bg-black/42 p-5 shadow-cinematic backdrop-blur-md sm:p-6 min-[2200px]:rounded-[2.25rem] min-[2200px]:p-8 min-[3200px]:p-10">
+                <p className="max-w-md text-sm leading-[1.45] text-primary/70 md:text-base min-[2200px]:max-w-[36rem] min-[2200px]:text-lg min-[3200px]:text-[1.35rem]">
                   The page keeps the original pitch-deck sequence, but reframes it as a dark,
                   premium investor narrative with clearer structure and more cinematic visual weight.
                 </p>
-                <div className="mt-5 grid grid-cols-3 gap-3">
+                <div className="mt-5 grid grid-cols-3 gap-3 min-[2200px]:mt-6 min-[2200px]:gap-4">
                   {heroStats.map(([value, label]) => (
                     <StatChip key={label} value={value} label={label} />
                   ))}
                 </div>
-                <div className="mt-5">
+                <div className="mt-5 min-[2200px]:mt-6">
                   <a
                     href="#product"
-                    className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-black transition-all duration-300 hover:gap-3 sm:text-base"
+                    className="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-black transition-all duration-300 hover:gap-3 sm:text-base min-[2200px]:px-7 min-[2200px]:py-3.5 min-[2200px]:text-lg min-[3200px]:text-xl"
                   >
                     View the workflow
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black transition-transform duration-300 group-hover:scale-110 sm:h-10 sm:w-10">
-                      <ArrowRight className="h-4 w-4 text-primary" />
+                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black transition-transform duration-300 group-hover:scale-110 sm:h-10 sm:w-10 min-[2200px]:h-12 min-[2200px]:w-12 min-[3200px]:h-14 min-[3200px]:w-14">
+                      <ArrowRight className="h-4 w-4 text-primary min-[2200px]:h-5 min-[2200px]:w-5 min-[3200px]:h-6 min-[3200px]:w-6" />
                     </span>
                   </a>
                 </div>
-                <p className="mt-5 text-xs text-gray-500 sm:text-sm">
+                <p className="mt-5 text-xs text-gray-500 sm:text-sm min-[2200px]:mt-6 min-[2200px]:text-base min-[3200px]:text-lg">
                   [Founder Name], CEO | [Founder Name], CTO
                 </p>
-                <div className="mt-5">
+                <div className="mt-5 min-[2200px]:mt-7">
                   <OrbitalVisual />
                 </div>
               </div>
