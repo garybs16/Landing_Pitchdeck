@@ -169,7 +169,7 @@ const askBars = [
 ];
 
 function SectionTag({ children }: { children: React.ReactNode }) {
-  return <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">{children}</p>;
+  return <p className="text-[10px] uppercase tracking-[0.32em] text-primary sm:text-xs">{children}</p>;
 }
 
 function SectionHeader({
@@ -192,7 +192,7 @@ function SectionHeader({
           <SectionTag>{label}</SectionTag>
           <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
           <div className="mx-auto mt-6 max-w-4xl">{children}</div>
-          <p className="mx-auto mt-7 max-w-[34rem] rounded-[1.5rem] border border-white/8 bg-black/35 px-6 py-4 text-center text-sm leading-relaxed text-gray-500 backdrop-blur-md lg:max-w-[38rem]">
+          <p className="mx-auto mt-7 max-w-[36rem] rounded-[1.5rem] border border-white/8 bg-black/45 px-6 py-4 text-center text-[13px] leading-relaxed text-gray-400 backdrop-blur-md sm:text-sm lg:max-w-[40rem]">
             {note}
           </p>
         </div>
@@ -208,7 +208,7 @@ function SectionHeader({
       </div>
       <div className="min-w-0">
         {children}
-        <p className="mt-7 max-w-[31rem] rounded-[1.5rem] border border-white/8 bg-black/35 px-5 py-4 text-sm leading-relaxed text-gray-500 backdrop-blur-md lg:ml-auto xl:max-w-[34rem]">
+        <p className="mt-7 max-w-[32rem] rounded-[1.5rem] border border-white/8 bg-black/45 px-5 py-4 text-[13px] leading-relaxed text-gray-400 backdrop-blur-md sm:text-sm lg:ml-auto xl:max-w-[35rem]">
           {note}
         </p>
       </div>
@@ -335,7 +335,7 @@ function ScrollRevealText({
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className={`mx-auto max-w-2xl px-4 text-balance text-center text-xs leading-relaxed text-[#DEDBC8] sm:text-sm md:text-base ${className}`}
+      className={`mx-auto max-w-3xl px-4 text-balance text-center text-sm leading-relaxed text-[#DEDBC8] sm:text-[15px] md:text-[1.02rem] ${className}`}
     >
       {text}
     </motion.p>
@@ -359,7 +359,7 @@ function ProductFeatureCard({
     <RevealCard delay={delay}>
       <div className="flex h-full min-h-[300px] flex-col rounded-[1.75rem] border border-white/5 bg-[#212121] p-5 shadow-cinematic sm:p-6">
         <div className="relative overflow-hidden rounded-[1.3rem] border border-white/5 bg-black/30">
-          <div className="cream-glow absolute inset-0 opacity-50" />
+              <div className="cream-glow absolute inset-0 opacity-45" />
           <img
             src={image}
             alt={title}
@@ -379,13 +379,13 @@ function ProductFeatureCard({
           {points.map((point) => (
             <div key={point} className="flex items-start gap-3">
               <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-              <p className="text-sm leading-relaxed text-gray-400">{point}</p>
+              <p className="text-[15px] leading-relaxed text-gray-300">{point}</p>
             </div>
           ))}
         </div>
         <a
           href="#team-ask"
-          className="mt-auto inline-flex items-center gap-2 pt-8 text-sm text-primary transition hover:gap-3"
+          className="mt-auto inline-flex items-center gap-2 pt-8 text-sm text-primary/90 transition hover:gap-3"
         >
           Learn more
           <ArrowRight className="h-4 w-4 -rotate-45" />
@@ -411,17 +411,17 @@ function InsightCard({
   return (
     <RevealCard delay={delay}>
       <div
-        className={`flex h-full min-h-[210px] flex-col justify-center rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.32))] p-6 text-center shadow-cinematic backdrop-blur-sm sm:p-7 ${className}`}
+        className={`flex h-full min-h-[220px] flex-col justify-center rounded-[1.6rem] border border-white/6 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(0,0,0,0.42))] p-6 text-center shadow-cinematic backdrop-blur-sm sm:p-7 ${className}`}
       >
         {value ? (
-          <p className="text-4xl font-light tracking-[-0.05em] sm:text-5xl" style={{ color: primaryText }}>
+          <p className="text-4xl font-light tracking-[-0.05em] sm:text-[3.4rem]" style={{ color: primaryText }}>
             {value}
           </p>
         ) : null}
-        <h3 className={`${value ? "mt-4" : ""} text-xl sm:text-2xl`} style={{ color: primaryText }}>
+        <h3 className={`${value ? "mt-4" : ""} text-[1.45rem] sm:text-[1.8rem]`} style={{ color: primaryText }}>
           {title}
         </h3>
-        <p className="mx-auto mt-2 max-w-[32ch] text-center text-sm leading-relaxed text-gray-400">
+        <p className="mx-auto mt-3 max-w-[30ch] text-center text-[15px] leading-relaxed text-gray-300">
           {text}
         </p>
       </div>
@@ -465,7 +465,7 @@ function EditorialImageCard({
             playsInline
             aria-hidden="true"
             preload="auto"
-            className={`absolute inset-0 h-full w-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
+          className={`absolute inset-0 h-full w-full object-cover opacity-82 transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
             src={videoSrc}
           />
         ) : null}
@@ -473,17 +473,17 @@ function EditorialImageCard({
           src={src}
           alt={alt}
           className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${
-            videoSrc ? "mix-blend-screen opacity-55" : ""
+            videoSrc ? "mix-blend-screen opacity-60" : ""
           } ${imageClassName}`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/34 to-black/12" />
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
           <div
-            className={`max-w-md rounded-[1.45rem] border border-white/8 bg-black/40 p-4 backdrop-blur-md sm:p-5 ${contentClassName}`}
+            className={`max-w-md rounded-[1.45rem] border border-white/8 bg-black/52 p-4 backdrop-blur-md sm:p-5 ${contentClassName}`}
           >
             <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">{eyebrow}</p>
             <p
-              className={`mt-2 max-w-[18ch] text-xl leading-tight sm:text-2xl ${titleClassName}`}
+              className={`mt-2 max-w-[20ch] text-xl leading-tight sm:text-[1.7rem] ${titleClassName}`}
               style={{ color: primaryText }}
             >
               {title}
@@ -538,7 +538,7 @@ function SectionBackdrop({
         transition={{ duration: 24, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
       />
       <div className="bg-noise absolute inset-0 opacity-[0.12]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/35 to-black/80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/12 via-black/42 to-black/82" />
       <div className="cream-glow absolute -left-16 top-8 h-56 w-56 opacity-35" />
       <div className="cream-glow absolute bottom-0 right-0 h-64 w-64 opacity-25" />
     </div>
@@ -1260,7 +1260,7 @@ export default function HomePage() {
             </div>
           </SectionHeader>
           <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:gap-7">
-            <div>
+            <div className="flex h-full flex-col gap-4">
               <div className="grid gap-4 md:grid-cols-2">
                 {[
                   {
@@ -1275,18 +1275,41 @@ export default function HomePage() {
                   }
                 ].map((person, index) => (
                   <RevealCard key={person.role} delay={0.1 * index}>
-                    <div className="rounded-[1.5rem] bg-black/55 p-5">
+                    <div className="rounded-[1.5rem] border border-white/5 bg-black/60 p-5">
                       <p className="text-2xl" style={{ color: primaryText }}>
                         {person.name}
                       </p>
                       <p className="mt-2 text-xs uppercase tracking-[0.25em] text-primary">
                         {person.role}
                       </p>
-                      <p className="mt-4 text-sm leading-relaxed text-gray-400">{person.text}</p>
+                      <p className="mt-4 text-[15px] leading-relaxed text-gray-300">{person.text}</p>
                     </div>
                   </RevealCard>
                 ))}
               </div>
+              <RevealCard delay={0.2}>
+                <div className="flex flex-1 flex-col rounded-[1.6rem] border border-white/5 bg-black/38 p-6 backdrop-blur-sm">
+                  <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">Why This Team</p>
+                  <p className="mt-4 max-w-2xl text-lg leading-relaxed text-primary/90 sm:text-[1.35rem]">
+                    A founding team built across creative tooling, 3D systems, and frontier model research,
+                    with the technical range to ship infrastructure and the product taste to make it usable.
+                  </p>
+                  <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                    {[
+                      "3D vision and tooling depth",
+                      "Model and inference expertise",
+                      "Production-native product judgment"
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="rounded-[1.25rem] border border-white/6 bg-black/45 px-4 py-4 text-sm leading-relaxed text-gray-300"
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </RevealCard>
             </div>
             <RevealCard delay={0.2}>
               <div className="flex h-full flex-col rounded-[1.75rem] border border-white/5 bg-black/45 p-6">
