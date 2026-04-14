@@ -295,7 +295,7 @@ function SectionShell({
   return (
     <section id={id} className={`relative isolate px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24 ${className}`}>
       <div className="cream-glow pointer-events-none absolute left-1/2 top-0 h-48 w-[28rem] -translate-x-1/2 opacity-30" />
-      <div className="mx-auto w-full max-w-7xl">{children}</div>
+      <div className="mx-auto w-full max-w-[1500px] 2xl:max-w-[1680px]">{children}</div>
     </section>
   );
 }
@@ -573,8 +573,8 @@ export default function HomePage() {
 
   return (
     <main className="relative bg-black">
-      <section className="h-screen p-4 md:p-6">
-        <div className="relative h-full overflow-hidden rounded-2xl bg-black shadow-cinematic md:rounded-[2rem]">
+      <section className="h-screen p-4 md:p-6 2xl:p-8">
+        <div className="relative mx-auto h-full max-w-[2200px] overflow-hidden rounded-2xl bg-black shadow-cinematic md:rounded-[2rem]">
           <video
             ref={heroVideoRef}
             autoPlay
@@ -592,7 +592,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
           <div className="vignette-overlay absolute inset-0" />
 
-          <div className="relative z-10 flex h-full flex-col p-4 sm:p-6 md:p-8 lg:p-10">
+          <div className="relative z-10 flex h-full flex-col p-4 sm:p-6 md:p-8 lg:p-10 2xl:p-12">
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
               <div className="rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-sm">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-gray-500">Deck Format</p>
@@ -624,16 +624,16 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end">
-              <div className="flex flex-col justify-end pb-4 lg:pb-10">
+            <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end 2xl:grid-cols-[minmax(0,1fr)_460px]">
+              <div className="flex flex-col justify-end pb-4 lg:pb-10 2xl:pb-12">
                 <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
                   Unstable ML
                 </p>
-                <p className="mt-4 max-w-xl font-serif text-xl italic text-primary/80 sm:text-2xl md:text-3xl">
+                <p className="mt-4 max-w-xl font-serif text-[clamp(1.15rem,1.8vw,2.25rem)] italic text-primary/80">
                   Generate cinematic 3D scenes from text in seconds.
                 </p>
                 <div
-                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[16vw] sm:text-[13vw] md:text-[10.8vw] lg:text-[8.2vw] xl:text-[7.4vw]"
+                  className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[clamp(3.2rem,8vw,9rem)]"
                   style={{ color: primaryText }}
                 >
                   <span className="block lg:inline">
