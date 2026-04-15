@@ -10,14 +10,18 @@ const heroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 const productVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
+const flowersVideo =
+  "https://videos.pexels.com/video-files/33126114/14119246_2160_3840_30fps.mp4";
+const cloudscapeVideo =
+  "https://videos.pexels.com/video-files/35016539/14833974_3840_2160_60fps.mp4";
 const sectionMotionVideos = {
-  problem: heroVideo,
-  solution: productVideo,
+  problem: cloudscapeVideo,
+  solution: flowersVideo,
   product: productVideo,
-  market: heroVideo,
+  market: cloudscapeVideo,
   competition: productVideo,
-  traction: heroVideo,
-  ask: productVideo
+  traction: flowersVideo,
+  ask: cloudscapeVideo
 };
 const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
