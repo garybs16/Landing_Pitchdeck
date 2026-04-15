@@ -135,18 +135,18 @@ const pricingTiers = [
     title: "Free",
     price: "$0",
     suffix: "/mo",
-    text: "800 credits every month to maximize top-of-funnel creator adoption.",
+    text: "Entry plan for fast adoption.",
     credits: "800 credits / month",
-    detail: "Zero-friction entry point for discovery and habit formation.",
-    margin: "Acquisition plan"
+    detail: "Best for trial and habit formation.",
+    margin: "User growth"
   },
   {
     title: "Pro",
     price: "$20",
     suffix: "/mo",
-    text: "15,000 credits per month, priced to onboard as many paying users as possible.",
+    text: "Low-cost paid plan built for volume.",
     credits: "15,000 credits / month",
-    detail: "25% profit margin. Credits are intentionally tight to create refill demand before reset.",
+    detail: "25% margin. Included credits are designed to drive refill usage.",
     margin: "25% margin"
   }
 ];
@@ -159,10 +159,9 @@ const tractionHighlights = [
 ];
 
 const onDemandBillingPoints = [
-  "2 cents per 10 credits once Pro users exhaust the included monthly balance.",
-  "100% profit margin on refill usage.",
-  "Billed weekly at the end of each week instead of forcing a monthly wait.",
-  "Expansion revenue starts the moment heavy users cross the 15,000-credit threshold."
+  "2 cents per 10 credits",
+  "100% margin",
+  "Weekly billing"
 ];
 
 const revenueLoop = [
@@ -1154,7 +1153,7 @@ export default function HomePage() {
               <SectionHeader
                 index="07"
                 label="Traction"
-                note="This slide explains how adoption, low entry pricing, and refill billing combine into a scalable monetization loop."
+                note="Simple model: cheap entry, broad adoption, then refill revenue from power users."
               >
                 <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
                   <WordsPullUpMultiStyle
@@ -1206,7 +1205,7 @@ export default function HomePage() {
                               {tier.title}
                             </p>
                             <p className="mt-2 text-sm text-primary/80">{tier.credits}</p>
-                            <p className="mt-2 text-sm leading-relaxed text-gray-400">{tier.text}</p>
+                            <p className="mt-1 text-sm leading-relaxed text-gray-400">{tier.text}</p>
                           </div>
                           <p className="text-right text-2xl" style={{ color: primaryText }}>
                             {tier.price}
@@ -1228,10 +1227,7 @@ export default function HomePage() {
                   <p className="mt-3 text-3xl" style={{ color: primaryText }}>
                     $192 upfront
                   </p>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-400">
-                    Annual Pro is billed up front at a 20% discount: $20 x 12 = $240, discounted to
-                    $192 total, or $16 per month effective.
-                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-400">$240 list price. 20% off. $16/mo effective.</p>
                 </div>
                 </div>
               </div>
@@ -1253,28 +1249,25 @@ export default function HomePage() {
                       <p className="text-4xl" style={{ color: primaryText }}>
                         $0.02
                       </p>
-                      <p className="mt-2 text-sm text-gray-400">Per 10 credits once included balance is depleted.</p>
+                      <p className="mt-2 text-sm text-gray-400">per 10 credits</p>
                     </div>
                     <div>
                       <p className="text-4xl" style={{ color: primaryText }}>
                         100%
                       </p>
-                      <p className="mt-2 text-sm text-gray-400">Profit margin on refill usage.</p>
+                      <p className="mt-2 text-sm text-gray-400">refill margin</p>
                     </div>
                   </div>
                 </div>
-                <div className="mt-5 space-y-3">
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
                   {onDemandBillingPoints.map((point) => (
-                    <div key={point} className="flex items-start gap-3 rounded-[1.2rem] border border-white/5 bg-black/25 px-4 py-3">
+                    <div key={point} className="flex items-center gap-3 rounded-[1.2rem] border border-white/5 bg-black/25 px-4 py-3">
                       <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                       <p className="text-sm leading-relaxed text-gray-400">{point}</p>
                     </div>
                   ))}
                 </div>
-                <p className="mt-5 text-sm leading-relaxed text-primary/75">
-                  Strategy: price Pro cheaply to maximize paid adoption, then monetize heavy usage through
-                  weekly refill billing rather than forcing creators to wait for the monthly reset.
-                </p>
+                <p className="mt-5 text-sm leading-relaxed text-primary/75">Cheap Pro gets users in. Credit overages drive expansion revenue.</p>
                 </div>
               </div>
             </RevealCard>
