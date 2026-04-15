@@ -132,23 +132,44 @@ const comparisonLabels = ["Speed", "3D Fidelity", "Editability"];
 
 const pricingTiers = [
   {
-    title: "Creator",
-    price: "$29",
+    title: "Free",
+    price: "$0",
     suffix: "/mo",
-    text: "Standard resolution, basic export"
+    text: "800 credits every month to maximize top-of-funnel creator adoption.",
+    credits: "800 credits / month",
+    detail: "Zero-friction entry point for discovery and habit formation.",
+    margin: "Acquisition plan"
   },
   {
     title: "Pro",
-    price: "$99",
+    price: "$20",
     suffix: "/mo",
-    text: "4K, Unreal export, team sharing"
-  },
-  {
-    title: "Studio",
-    price: "Custom",
-    suffix: "",
-    text: "SSO, API access, trained models"
+    text: "15,000 credits per month, priced to onboard as many paying users as possible.",
+    credits: "15,000 credits / month",
+    detail: "25% profit margin. Credits are intentionally tight to create refill demand before reset.",
+    margin: "25% margin"
   }
+];
+
+const tractionHighlights = [
+  ["800", "Free credits / month"],
+  ["15k", "Pro credits / month"],
+  ["$20", "Pro monthly price"],
+  ["$192", "Yearly plan upfront"]
+];
+
+const onDemandBillingPoints = [
+  "2 cents per 10 credits once Pro users exhaust the included monthly balance.",
+  "100% profit margin on refill usage.",
+  "Billed weekly at the end of each week instead of forcing a monthly wait.",
+  "Expansion revenue starts the moment heavy users cross the 15,000-credit threshold."
+];
+
+const revenueLoop = [
+  { label: "Free to Paid", value: 35 },
+  { label: "Cheap Pro Entry", value: 62 },
+  { label: "Credit Exhaustion", value: 82 },
+  { label: "Weekly Refill Billing", value: 100 }
 ];
 
 const fundAllocation = ["50% R&D", "25% Compute", "15% GTM", "10% Ops"];
@@ -1133,25 +1154,20 @@ export default function HomePage() {
               <SectionHeader
                 index="07"
                 label="Traction"
-                note="Show that demand, retention, and monetization already exist. This section should feel compact and credible."
+                note="This slide explains how adoption, low entry pricing, and refill billing combine into a scalable monetization loop."
               >
                 <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
                   <WordsPullUpMultiStyle
                     justify="start"
                     segments={[
-                      { text: "Strong early signals.", className: "font-normal" },
-                      { text: "Scalable revenue engine.", className: "font-serif italic" }
+                      { text: "Low-friction entry.", className: "font-normal" },
+                      { text: "Expansion revenue by usage.", className: "font-serif italic" }
                     ]}
                   />
                 </div>
               </SectionHeader>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {[
-                  ["25k+", "Waitlisted creators"],
-                  ["42%", "MoM growth"],
-                  ["88%", "Week-4 retention"],
-                  ["12k+", "Renders / month"]
-                ].map(([value, label], index) => (
+                {tractionHighlights.map(([value, label], index) => (
                   <RevealCard key={label} delay={0.08 * index}>
                     <div className="rounded-[1.5rem] bg-black/60 p-5">
                       <p className="text-4xl" style={{ color: primaryText }}>
@@ -1163,7 +1179,7 @@ export default function HomePage() {
                 ))}
               </div>
               <div className="mt-6">
-                <DataBars title="Monthly Demand Signal" bars={growthBars} />
+                <DataBars title="Revenue Expansion Loop" bars={revenueLoop} />
               </div>
               </div>
             </div>
@@ -1184,23 +1200,39 @@ export default function HomePage() {
                   {pricingTiers.map((tier, index) => (
                     <RevealCard key={tier.title} delay={0.08 * index}>
                       <div className="rounded-[1.5rem] bg-[#151515] p-5">
-                        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                           <div>
                             <p className="text-lg" style={{ color: primaryText }}>
                               {tier.title}
                             </p>
-                            <p className="mt-2 text-sm text-gray-400">{tier.text}</p>
+                            <p className="mt-2 text-sm text-primary/80">{tier.credits}</p>
+                            <p className="mt-2 text-sm leading-relaxed text-gray-400">{tier.text}</p>
                           </div>
                           <p className="text-right text-2xl" style={{ color: primaryText }}>
                             {tier.price}
                             <span className="ml-1 text-sm text-gray-500">{tier.suffix}</span>
                           </p>
                         </div>
+                        <div className="mt-4 grid gap-3 sm:grid-cols-[auto_1fr] sm:items-start">
+                          <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.22em] text-primary/85">
+                            {tier.margin}
+                          </span>
+                          <p className="text-sm leading-relaxed text-gray-400">{tier.detail}</p>
+                        </div>
                       </div>
                     </RevealCard>
                   ))}
                 </div>
-                <p className="mt-5 text-sm text-primary/75">$0.05 / render minute usage-based compute</p>
+                <div className="mt-5 rounded-[1.4rem] border border-white/6 bg-black/35 p-4">
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-primary">Yearly Incentive</p>
+                  <p className="mt-3 text-3xl" style={{ color: primaryText }}>
+                    $192 upfront
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-gray-400">
+                    Annual Pro is billed up front at a 20% discount: $20 x 12 = $240, discounted to
+                    $192 total, or $16 per month effective.
+                  </p>
+                </div>
                 </div>
               </div>
             </RevealCard>
@@ -1214,23 +1246,35 @@ export default function HomePage() {
                   opacity={0.08}
                 />
                 <div className="relative z-10">
-                <SectionTag>Fund Allocation</SectionTag>
-                <div className="mt-6 space-y-4">
-                  {askBars.map((item) => (
-                    <div key={item.label}>
-                      <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="text-gray-400">{item.label}</span>
-                        <span className="text-primary/80">{item.value}%</span>
-                      </div>
-                      <div className="h-2 rounded-full bg-white/5">
-                        <div
-                          className="h-2 rounded-full bg-gradient-to-r from-[#7f7868] via-[#b9b099] to-[#ede4cd]"
-                          style={{ width: `${item.value}%` }}
-                        />
-                      </div>
+                <SectionTag>On-Demand Billing</SectionTag>
+                <div className="mt-6 rounded-[1.5rem] border border-white/6 bg-black/35 p-5">
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <p className="text-4xl" style={{ color: primaryText }}>
+                        $0.02
+                      </p>
+                      <p className="mt-2 text-sm text-gray-400">Per 10 credits once included balance is depleted.</p>
+                    </div>
+                    <div>
+                      <p className="text-4xl" style={{ color: primaryText }}>
+                        100%
+                      </p>
+                      <p className="mt-2 text-sm text-gray-400">Profit margin on refill usage.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-5 space-y-3">
+                  {onDemandBillingPoints.map((point) => (
+                    <div key={point} className="flex items-start gap-3 rounded-[1.2rem] border border-white/5 bg-black/25 px-4 py-3">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <p className="text-sm leading-relaxed text-gray-400">{point}</p>
                     </div>
                   ))}
                 </div>
+                <p className="mt-5 text-sm leading-relaxed text-primary/75">
+                  Strategy: price Pro cheaply to maximize paid adoption, then monetize heavy usage through
+                  weekly refill billing rather than forcing creators to wait for the monthly reset.
+                </p>
                 </div>
               </div>
             </RevealCard>
