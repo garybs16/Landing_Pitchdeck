@@ -15,13 +15,13 @@ const goldenFieldVideo =
 const mountainLakeVideo =
   "https://videos.pexels.com/video-files/30600756/13089083_2560_1440_30fps.mp4";
 const sectionMotionVideos = {
-  problem: mountainLakeVideo,
+  problem: goldenFieldVideo,
   solution: goldenFieldVideo,
   product: productVideo,
   market: goldenFieldVideo,
   competition: productVideo,
   traction: goldenFieldVideo,
-  ask: mountainLakeVideo
+  ask: goldenFieldVideo
 };
 const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
