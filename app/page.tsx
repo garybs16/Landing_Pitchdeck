@@ -525,7 +525,9 @@ function SectionBackdrop({
   className = "",
   imageClassName = "",
   videoClassName = "",
-  opacity = 0.18
+  opacity = 0.18,
+  showImage = true,
+  videoOpacity
 }: {
   src: string;
   videoSrc?: string;
@@ -533,6 +535,8 @@ function SectionBackdrop({
   imageClassName?: string;
   videoClassName?: string;
   opacity?: number;
+  showImage?: boolean;
+  videoOpacity?: number;
 }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
@@ -544,23 +548,25 @@ function SectionBackdrop({
           playsInline
           preload="auto"
           className={`absolute inset-0 h-full w-full object-cover ${videoClassName}`}
-          style={{ opacity: Math.min(opacity + 0.04, 0.22) }}
+          style={{ opacity: videoOpacity ?? Math.min(opacity + 0.04, 0.22) }}
           initial={false}
           animate={{ scale: [1.05, 1.09, 1.05], x: [0, 8, 0], y: [0, -6, 0] }}
           transition={{ duration: 34, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
           src={videoSrc}
         />
       ) : null}
-      <motion.img
-        src={src}
-        alt=""
-        aria-hidden="true"
-        className={`h-full w-full object-cover ${imageClassName}`}
-        style={{ opacity }}
-        initial={false}
-        animate={{ scale: [1.02, 1.06, 1.02], x: [0, -12, 0], y: [0, 10, 0] }}
-        transition={{ duration: 24, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
-      />
+      {showImage ? (
+        <motion.img
+          src={src}
+          alt=""
+          aria-hidden="true"
+          className={`h-full w-full object-cover ${imageClassName}`}
+          style={{ opacity }}
+          initial={false}
+          animate={{ scale: [1.02, 1.06, 1.02], x: [0, -12, 0], y: [0, 10, 0] }}
+          transition={{ duration: 24, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
+        />
+      ) : null}
       <div className="bg-noise absolute inset-0 opacity-[0.12]" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/12 via-black/42 to-black/82" />
       <div className="cream-glow absolute -left-16 top-8 h-56 w-56 opacity-35" />
@@ -718,9 +724,10 @@ export default function HomePage() {
           <SectionBackdrop
             src={deckImages.problem}
             videoSrc={sectionMotionVideos.problem}
-            imageClassName="object-right"
-            videoClassName="object-center blur-[0.2px]"
+            showImage={false}
+            videoClassName="object-center"
             opacity={0.16}
+            videoOpacity={0.34}
           />
           <div className="absolute inset-0 deck-grid opacity-[0.06]" />
           <div className="relative z-10">
@@ -969,9 +976,10 @@ export default function HomePage() {
               <SectionBackdrop
                 src={deckImages.market}
                 videoSrc={sectionMotionVideos.market}
-                imageClassName="object-right"
-                videoClassName="object-[52%_42%]"
+                showImage={false}
+                videoClassName="object-center"
                 opacity={0.12}
+                videoOpacity={0.32}
               />
               <div className="relative z-10">
               <SectionHeader
@@ -1013,9 +1021,10 @@ export default function HomePage() {
               <SectionBackdrop
                 src={deckImages.market}
                 videoSrc={sectionMotionVideos.market}
-                imageClassName="object-left"
-                videoClassName="object-[35%_45%]"
+                showImage={false}
+                videoClassName="object-center"
                 opacity={0.11}
+                videoOpacity={0.28}
               />
               <div className="relative z-10">
               <SectionTag>Why Now</SectionTag>
@@ -1280,9 +1289,10 @@ export default function HomePage() {
           <SectionBackdrop
             src={deckImages.ask}
             videoSrc={sectionMotionVideos.ask}
-            imageClassName="object-center"
+            showImage={false}
             videoClassName="object-center"
             opacity={0.12}
+            videoOpacity={0.32}
           />
           <div className="relative z-10">
           <SectionHeader
