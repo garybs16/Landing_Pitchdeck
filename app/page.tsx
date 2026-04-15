@@ -10,20 +10,18 @@ const heroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 const productVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
-const warmFieldImage =
-  "https://images.pexels.com/photos/33411353/pexels-photo-33411353.jpeg?cs=srgb&dl=pexels-strannik-sk-33411353.jpg&fm=jpg";
 const goldenFieldVideo =
   "https://videos.pexels.com/video-files/29894402/12827622_2560_1440_30fps.mp4";
 const mountainLakeVideo =
   "https://videos.pexels.com/video-files/30600756/13089083_2560_1440_30fps.mp4";
 const sectionMotionVideos = {
-  problem: goldenFieldVideo,
+  problem: mountainLakeVideo,
   solution: goldenFieldVideo,
   product: productVideo,
   market: goldenFieldVideo,
   competition: productVideo,
   traction: goldenFieldVideo,
-  ask: goldenFieldVideo
+  ask: mountainLakeVideo
 };
 const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
@@ -465,10 +463,7 @@ function EditorialImageCard({
   className = "",
   imageClassName = "",
   contentClassName = "",
-  titleClassName = "",
-  showImage = true,
-  videoOpacity,
-  overlayClassName = "bg-gradient-to-t from-black via-black/34 to-black/12"
+  titleClassName = ""
 }: {
   src: string;
   videoSrc?: string;
@@ -480,9 +475,6 @@ function EditorialImageCard({
   imageClassName?: string;
   contentClassName?: string;
   titleClassName?: string;
-  showImage?: boolean;
-  videoOpacity?: number;
-  overlayClassName?: string;
 }) {
   return (
     <RevealCard delay={delay}>
@@ -497,21 +489,18 @@ function EditorialImageCard({
             playsInline
             aria-hidden="true"
             preload="auto"
-            className={`absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
-            style={{ opacity: videoOpacity ?? 0.82 }}
+          className={`absolute inset-0 h-full w-full object-cover opacity-82 transition-transform duration-700 group-hover:scale-[1.03] ${imageClassName}`}
             src={videoSrc}
           />
         ) : null}
-        {showImage ? (
-          <img
-            src={src}
-            alt={alt}
-            className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${
-              videoSrc ? "mix-blend-screen opacity-60" : ""
-            } ${imageClassName}`}
-          />
-        ) : null}
-        <div className={`absolute inset-0 ${overlayClassName}`} />
+        <img
+          src={src}
+          alt={alt}
+          className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${
+            videoSrc ? "mix-blend-screen opacity-60" : ""
+          } ${imageClassName}`}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/34 to-black/12" />
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
           <div
             className={`max-w-md rounded-[1.45rem] border border-white/8 bg-black/52 p-4 backdrop-blur-md sm:p-5 ${contentClassName}`}
@@ -538,8 +527,7 @@ function SectionBackdrop({
   videoClassName = "",
   opacity = 0.18,
   showImage = true,
-  videoOpacity,
-  gradientClassName = "bg-gradient-to-b from-black/12 via-black/42 to-black/82"
+  videoOpacity
 }: {
   src: string;
   videoSrc?: string;
@@ -549,7 +537,6 @@ function SectionBackdrop({
   opacity?: number;
   showImage?: boolean;
   videoOpacity?: number;
-  gradientClassName?: string;
 }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
@@ -581,7 +568,7 @@ function SectionBackdrop({
         />
       ) : null}
       <div className="bg-noise absolute inset-0 opacity-[0.12]" />
-      <div className={`absolute inset-0 ${gradientClassName}`} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/12 via-black/42 to-black/82" />
       <div className="cream-glow absolute -left-16 top-8 h-56 w-56 opacity-35" />
       <div className="cream-glow absolute bottom-0 right-0 h-64 w-64 opacity-25" />
     </div>
@@ -735,11 +722,12 @@ export default function HomePage() {
       <SectionShell id="problem">
         <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] px-5 py-10 text-center shadow-cinematic sm:px-8 sm:py-14 md:px-12">
           <SectionBackdrop
-            src={warmFieldImage}
-            videoClassName="object-[52%_44%]"
-            imageClassName="object-[52%_44%]"
-            opacity={0.4}
-            gradientClassName="bg-gradient-to-b from-black/18 via-black/34 to-black/78"
+            src={deckImages.problem}
+            videoSrc={sectionMotionVideos.problem}
+            showImage={false}
+            videoClassName="object-[50%_42%]"
+            opacity={0.16}
+            videoOpacity={0.48}
           />
           <div className="relative z-10">
           <SectionHeader
@@ -774,15 +762,15 @@ export default function HomePage() {
           </div>
           <div className="mt-10 grid gap-5 xl:gap-6 lg:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
-              src={warmFieldImage}
+              src={deckImages.problem}
+              videoSrc={sectionMotionVideos.problem}
               alt="A creator overwhelmed by traditional 3D production tooling."
               eyebrow="Production Friction"
               title="Great ideas lose force when the workflow becomes the obstacle."
               className="min-h-[320px]"
-              imageClassName="object-[52%_44%]"
+              imageClassName="object-center"
               contentClassName="mx-auto max-w-[28rem] text-center"
               titleClassName="max-w-none"
-              overlayClassName="bg-gradient-to-t from-black/72 via-black/22 to-black/8"
             />
             <div className="grid gap-4">
               <InsightCard
@@ -985,10 +973,12 @@ export default function HomePage() {
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
               <SectionBackdrop
-                src={warmFieldImage}
-                imageClassName="object-[50%_46%]"
-                opacity={0.38}
-                gradientClassName="bg-gradient-to-b from-black/18 via-black/32 to-black/76"
+                src={deckImages.market}
+                videoSrc={sectionMotionVideos.market}
+                showImage={false}
+                videoClassName="object-[50%_52%]"
+                opacity={0.12}
+                videoOpacity={0.46}
               />
               <div className="relative z-10">
               <SectionHeader
@@ -1028,10 +1018,12 @@ export default function HomePage() {
           <RevealCard delay={0.2}>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 sm:p-8">
               <SectionBackdrop
-                src={warmFieldImage}
-                imageClassName="object-[50%_46%]"
-                opacity={0.34}
-                gradientClassName="bg-gradient-to-b from-black/20 via-black/34 to-black/78"
+                src={deckImages.market}
+                videoSrc={sectionMotionVideos.market}
+                showImage={false}
+                videoClassName="object-[50%_52%]"
+                opacity={0.11}
+                videoOpacity={0.4}
               />
               <div className="relative z-10">
               <SectionTag>Why Now</SectionTag>
@@ -1047,14 +1039,13 @@ export default function HomePage() {
               </div>
               <div className="mt-8">
                 <EditorialImageCard
-                  src={warmFieldImage}
+                  src={deckImages.market}
+                  videoSrc={sectionMotionVideos.market}
                   alt="A global 3D visual illustrating market expansion and network growth."
                   eyebrow="Global Scale"
                   title="Demand is global, visual, and increasingly native to AI-first production."
                   delay={0.25}
                   className="min-h-[250px]"
-                  imageClassName="object-[50%_44%]"
-                  overlayClassName="bg-gradient-to-t from-black/70 via-black/20 to-black/8"
                 />
               </div>
               </div>
@@ -1295,10 +1286,12 @@ export default function HomePage() {
       <SectionShell id="team-ask" className="pb-20">
         <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8 md:p-10">
           <SectionBackdrop
-            src={warmFieldImage}
-            imageClassName="object-[52%_44%]"
-            opacity={0.36}
-            gradientClassName="bg-gradient-to-b from-black/18 via-black/30 to-black/76"
+            src={deckImages.ask}
+            videoSrc={sectionMotionVideos.ask}
+            showImage={false}
+            videoClassName="object-[52%_45%]"
+            opacity={0.12}
+            videoOpacity={0.46}
           />
           <div className="relative z-10">
           <SectionHeader
@@ -1372,13 +1365,13 @@ export default function HomePage() {
               <div className="flex h-full flex-col rounded-[1.75rem] border border-white/5 bg-black/45 p-6">
                 <div className="mb-6">
                   <EditorialImageCard
-                    src={warmFieldImage}
+                    src={deckImages.ask}
+                    videoSrc={sectionMotionVideos.ask}
                     alt="A glowing rocket visual representing growth and competitive acceleration."
                     eyebrow="Scale Up"
                     title="Capital turns product velocity into durable market advantage."
                     className="min-h-[220px]"
-                    imageClassName="object-[52%_44%]"
-                    overlayClassName="bg-gradient-to-t from-black/72 via-black/20 to-black/5"
+                    imageClassName="object-top"
                   />
                 </div>
                 <p className="text-xs uppercase tracking-[0.25em] text-primary">The Ask</p>
