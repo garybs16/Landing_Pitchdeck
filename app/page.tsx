@@ -10,18 +10,18 @@ const heroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 const productVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
-const flowersVideo =
-  "https://videos.pexels.com/video-files/33126114/14119246_2160_3840_30fps.mp4";
-const cloudscapeVideo =
-  "https://videos.pexels.com/video-files/35016539/14833974_3840_2160_60fps.mp4";
+const goldenFieldVideo =
+  "https://videos.pexels.com/video-files/29894402/12827622_2560_1440_30fps.mp4";
+const mountainLakeVideo =
+  "https://videos.pexels.com/video-files/30600756/13089083_2560_1440_30fps.mp4";
 const sectionMotionVideos = {
-  problem: cloudscapeVideo,
-  solution: flowersVideo,
+  problem: mountainLakeVideo,
+  solution: goldenFieldVideo,
   product: productVideo,
-  market: cloudscapeVideo,
+  market: goldenFieldVideo,
   competition: productVideo,
-  traction: flowersVideo,
-  ask: cloudscapeVideo
+  traction: goldenFieldVideo,
+  ask: mountainLakeVideo
 };
 const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
@@ -725,11 +725,10 @@ export default function HomePage() {
             src={deckImages.problem}
             videoSrc={sectionMotionVideos.problem}
             showImage={false}
-            videoClassName="object-center"
+            videoClassName="object-[50%_42%]"
             opacity={0.16}
-            videoOpacity={0.34}
+            videoOpacity={0.48}
           />
-          <div className="absolute inset-0 deck-grid opacity-[0.06]" />
           <div className="relative z-10">
           <SectionHeader
             index="02"
@@ -977,9 +976,9 @@ export default function HomePage() {
                 src={deckImages.market}
                 videoSrc={sectionMotionVideos.market}
                 showImage={false}
-                videoClassName="object-center"
+                videoClassName="object-[50%_52%]"
                 opacity={0.12}
-                videoOpacity={0.32}
+                videoOpacity={0.46}
               />
               <div className="relative z-10">
               <SectionHeader
@@ -1022,9 +1021,9 @@ export default function HomePage() {
                 src={deckImages.market}
                 videoSrc={sectionMotionVideos.market}
                 showImage={false}
-                videoClassName="object-center"
+                videoClassName="object-[50%_52%]"
                 opacity={0.11}
-                videoOpacity={0.28}
+                videoOpacity={0.4}
               />
               <div className="relative z-10">
               <SectionTag>Why Now</SectionTag>
@@ -1290,9 +1289,9 @@ export default function HomePage() {
             src={deckImages.ask}
             videoSrc={sectionMotionVideos.ask}
             showImage={false}
-            videoClassName="object-center"
+            videoClassName="object-[52%_45%]"
             opacity={0.12}
-            videoOpacity={0.32}
+            videoOpacity={0.46}
           />
           <div className="relative z-10">
           <SectionHeader
