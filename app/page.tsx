@@ -10,14 +10,19 @@ const heroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4";
 const productVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260406_133058_0504132a-0cf3-4450-a370-8ea3b05c95d4.mp4";
+const problemVideo = "https://www.pexels.com/download/video/31660894/";
+const marketVideo =
+  "https://media.istockphoto.com/id/1457070706/video/beautiful-night-scene-with-the-full-moon-rising-over-river-with-a-lunar-path.mp4?s=mp4-640x640-is&k=20&c=aT_zPzJYe3lx3fwePKUjA6Wr9jWzhEfBm0THH0E9g6Y=";
+const askVideo =
+  "https://www.pexels.com/download/video/31129791/";
 const sectionMotionVideos = {
-  problem: heroVideo,
+  problem: problemVideo,
   solution: productVideo,
   product: productVideo,
-  market: heroVideo,
+  market: marketVideo,
   competition: productVideo,
   traction: heroVideo,
-  ask: productVideo
+  ask: askVideo
 };
 const deckImages = {
   problem: "/prisma-media/problem-orbit.svg",
@@ -126,40 +131,66 @@ const comparisonRows = [
 ];
 const comparisonLabels = ["Speed", "3D Fidelity", "Editability"];
 
-const pricingTiers = [
+const tractionHighlights = [
+  ["800", "Free credits / month"],
+  ["15k", "Pro credits / month"],
+  ["$192", "Annual Pro upfront"],
+  ["100%", "On-demand margin"]
+];
+const tractionPlans = [
   {
-    title: "Creator",
-    price: "$29",
+    title: "Free",
+    price: "$0",
     suffix: "/mo",
-    text: "Standard resolution, basic export"
+    text: "800 monthly credits remove friction, seed habit, and widen the top of funnel.",
+    note: "Top-of-funnel acquisition"
   },
   {
     title: "Pro",
-    price: "$99",
+    price: "$20",
     suffix: "/mo",
-    text: "4K, Unreal export, team sharing"
+    text: "15,000 monthly credits at 25% margin, priced to maximize conversion and subscriber volume.",
+    note: "$192/year prepaid, equal to $16/mo after a 20% discount"
+  }
+];
+const tractionLoop = [
+  {
+    title: "Free acquisition",
+    text: "Users start free, hit value fast, and build usage before any paywall appears."
   },
   {
-    title: "Studio",
-    price: "Custom",
-    suffix: "",
-    text: "SSO, API access, trained models"
+    title: "Cheap Pro conversion",
+    text: "A $20 Pro plan converts broadly because the price is easy to justify."
+  },
+  {
+    title: "Usage expansion",
+    text: "Heavy users exhaust included credits and naturally step into refill billing."
+  }
+];
+const onDemandBilling = [
+  { label: "Refill rate", value: "2c / 10 credits" },
+  { label: "Billing cadence", value: "Weekly" },
+  { label: "Margin profile", value: "100%" }
+];
+const founderCards = [
+  {
+    name: "[Founder Name]",
+    role: "CEO",
+    text: "Ex-Pixar tools lead. PhD in 3D Vision.",
+    proof: "Creative tooling + vision systems"
+  },
+  {
+    name: "[Founder Name]",
+    role: "CTO",
+    text: "Ex-OpenAI researcher. Gen-video models.",
+    proof: "Frontier model and inference depth"
   }
 ];
 
-const fundAllocation = ["50% R&D", "25% Compute", "15% GTM", "10% Ops"];
 const heroStats = [
   ["25k+", "waitlist"],
   ["42%", "MoM growth"],
   ["88%", "retention"]
-];
-const growthBars = [
-  { label: "Jan", value: 24 },
-  { label: "Feb", value: 34 },
-  { label: "Mar", value: 52 },
-  { label: "Apr", value: 68 },
-  { label: "May", value: 82 },
-  { label: "Jun", value: 96 }
 ];
 const askBars = [
   { label: "R&D", value: 50 },
@@ -1129,25 +1160,20 @@ export default function HomePage() {
               <SectionHeader
                 index="07"
                 label="Traction"
-                note="Show that demand, retention, and monetization already exist. This section should feel compact and credible."
+                note="Low-friction entry. Cheap paid conversion. Expansion once active users run through credits."
               >
                 <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
                   <WordsPullUpMultiStyle
                     justify="start"
                     segments={[
-                      { text: "Strong early signals.", className: "font-normal" },
-                      { text: "Scalable revenue engine.", className: "font-serif italic" }
+                      { text: "Cheap subscription.", className: "font-normal" },
+                      { text: "High-margin expansion.", className: "font-serif italic" }
                     ]}
                   />
                 </div>
               </SectionHeader>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {[
-                  ["25k+", "Waitlisted creators"],
-                  ["42%", "MoM growth"],
-                  ["88%", "Week-4 retention"],
-                  ["12k+", "Renders / month"]
-                ].map(([value, label], index) => (
+                {tractionHighlights.map(([value, label], index) => (
                   <RevealCard key={label} delay={0.08 * index}>
                     <div className="rounded-[1.5rem] bg-black/60 p-5">
                       <p className="text-4xl" style={{ color: primaryText }}>
@@ -1158,9 +1184,51 @@ export default function HomePage() {
                   </RevealCard>
                 ))}
               </div>
-              <div className="mt-6">
-                <DataBars title="Monthly Demand Signal" bars={growthBars} />
-              </div>
+              <RevealCard delay={0.16}>
+                <div className="mt-6 rounded-[1.75rem] border border-white/6 bg-[linear-gradient(180deg,rgba(10,10,10,0.92),rgba(0,0,0,0.74))] p-5 shadow-cinematic sm:p-6">
+                  <div className="flex flex-col gap-4 border-b border-white/6 pb-5 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.28em] text-primary/75">Revenue Engine</p>
+                      <p className="mt-3 max-w-[42rem] text-base leading-relaxed text-gray-300 sm:text-lg">
+                        The model is simple: acquire cheaply, convert broadly, expand by usage.
+                      </p>
+                    </div>
+                    <div className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[10px] uppercase tracking-[0.22em] text-primary/80">
+                      3-step monetization flow
+                    </div>
+                  </div>
+                  <div className="relative mt-6">
+                    <div className="absolute left-[12%] right-[12%] top-6 hidden h-px bg-gradient-to-r from-white/0 via-primary/35 to-white/0 lg:block" />
+                    <div className="grid gap-4 lg:grid-cols-3">
+                      {tractionLoop.map((item, index) => (
+                        <div
+                          key={item.title}
+                          className="relative rounded-[1.45rem] border border-white/6 bg-black/45 p-5 backdrop-blur-sm"
+                        >
+                          <div className="mb-4 flex items-center justify-between">
+                            <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-sm font-medium text-primary">
+                              0{index + 1}
+                            </span>
+                            {index < tractionLoop.length - 1 ? (
+                              <span className="hidden rounded-full border border-white/10 bg-black/35 p-2 text-primary/80 lg:inline-flex">
+                                <ArrowRight className="h-4 w-4" />
+                              </span>
+                            ) : (
+                              <span className="hidden text-[10px] uppercase tracking-[0.22em] text-primary/65 lg:block">
+                                Expansion
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-xl" style={{ color: primaryText }}>
+                            {item.title}
+                          </p>
+                          <p className="mt-3 text-sm leading-relaxed text-gray-400">{item.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </RevealCard>
               </div>
             </div>
           </RevealCard>
@@ -1175,17 +1243,18 @@ export default function HomePage() {
                   opacity={0.1}
                 />
                 <div className="relative z-10">
-                <SectionTag>Model</SectionTag>
+                <SectionTag>Plans</SectionTag>
                 <div className="mt-6 grid gap-4">
-                  {pricingTiers.map((tier, index) => (
+                  {tractionPlans.map((tier, index) => (
                     <RevealCard key={tier.title} delay={0.08 * index}>
                       <div className="rounded-[1.5rem] bg-[#151515] p-5">
-                        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                           <div>
                             <p className="text-lg" style={{ color: primaryText }}>
                               {tier.title}
                             </p>
                             <p className="mt-2 text-sm text-gray-400">{tier.text}</p>
+                            <p className="mt-3 text-xs uppercase tracking-[0.2em] text-primary/75">{tier.note}</p>
                           </div>
                           <p className="text-right text-2xl" style={{ color: primaryText }}>
                             {tier.price}
@@ -1196,7 +1265,20 @@ export default function HomePage() {
                     </RevealCard>
                   ))}
                 </div>
-                <p className="mt-5 text-sm text-primary/75">$0.05 / render minute usage-based compute</p>
+                <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                  {[
+                    ["$240", "Annual list"],
+                    ["20%", "Prepay discount"],
+                    ["$192", "Billed upfront"]
+                  ].map(([value, label]) => (
+                    <div key={label} className="rounded-[1.2rem] border border-white/6 bg-black/45 px-4 py-4 text-center">
+                      <p className="text-2xl" style={{ color: primaryText }}>
+                        {value}
+                      </p>
+                      <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-gray-500">{label}</p>
+                    </div>
+                  ))}
+                </div>
                 </div>
               </div>
             </RevealCard>
@@ -1210,22 +1292,28 @@ export default function HomePage() {
                   opacity={0.08}
                 />
                 <div className="relative z-10">
-                <SectionTag>Fund Allocation</SectionTag>
-                <div className="mt-6 space-y-4">
-                  {askBars.map((item) => (
-                    <div key={item.label}>
-                      <div className="mb-2 flex items-center justify-between text-sm">
-                        <span className="text-gray-400">{item.label}</span>
-                        <span className="text-primary/80">{item.value}%</span>
-                      </div>
-                      <div className="h-2 rounded-full bg-white/5">
-                        <div
-                          className="h-2 rounded-full bg-gradient-to-r from-[#7f7868] via-[#b9b099] to-[#ede4cd]"
-                          style={{ width: `${item.value}%` }}
-                        />
-                      </div>
+                <SectionTag>On-Demand Billing</SectionTag>
+                <div className="mt-6 rounded-[1.5rem] bg-[#151515] p-5">
+                  <p className="text-3xl leading-none" style={{ color: primaryText }}>
+                    2c / 10 credits
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-400">
+                    When Pro users exhaust 15,000 monthly credits, they keep going immediately
+                    through refill billing instead of waiting for reset.
+                  </p>
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {onDemandBilling.map((item) => (
+                    <div key={item.label} className="rounded-[1.25rem] border border-white/6 bg-black/45 px-4 py-4 text-center">
+                      <p className="text-xl" style={{ color: primaryText }}>
+                        {item.value}
+                      </p>
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-gray-500">{item.label}</p>
                     </div>
                   ))}
+                </div>
+                <div className="mt-4 rounded-[1.35rem] border border-white/6 bg-black/45 p-4 text-sm leading-relaxed text-gray-400">
+                  Subscription gets users in. Refill billing is where expansion revenue compounds.
                 </div>
                 </div>
               </div>
@@ -1247,7 +1335,7 @@ export default function HomePage() {
           <SectionHeader
             index="08"
             label="Team & Ask"
-            note="Close with conviction: the right team, a specific raise, and a clear sense of where the capital goes."
+            note="The close should feel decisive: the right team, a crisp raise, and a clear deployment plan."
           >
             <div className="max-w-3xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
               <WordsPullUpMultiStyle
@@ -1262,20 +1350,10 @@ export default function HomePage() {
           <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:gap-7">
             <div className="flex h-full flex-col gap-4">
               <div className="grid gap-4 md:grid-cols-2">
-                {[
-                  {
-                    name: "[Founder Name]",
-                    role: "CEO",
-                    text: "Ex-Pixar tools lead. PhD in 3D Vision."
-                  },
-                  {
-                    name: "[Founder Name]",
-                    role: "CTO",
-                    text: "Ex-OpenAI researcher. Gen-video models."
-                  }
-                ].map((person, index) => (
+                {founderCards.map((person, index) => (
                   <RevealCard key={person.role} delay={0.1 * index}>
                     <div className="rounded-[1.5rem] border border-white/5 bg-black/60 p-5">
+                      <p className="text-[10px] uppercase tracking-[0.22em] text-primary/75">{person.proof}</p>
                       <p className="text-2xl" style={{ color: primaryText }}>
                         {person.name}
                       </p>
@@ -1291,8 +1369,7 @@ export default function HomePage() {
                 <div className="flex flex-1 flex-col rounded-[1.6rem] border border-white/5 bg-black/38 p-6 backdrop-blur-sm">
                   <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">Why This Team</p>
                   <p className="mt-4 max-w-2xl text-lg leading-relaxed text-primary/90 sm:text-[1.35rem]">
-                    A founding team built across creative tooling, 3D systems, and frontier model research,
-                    with the technical range to ship infrastructure and the product taste to make it usable.
+                    Product taste, creative tooling depth, and model expertise sit in the same founding team.
                   </p>
                   <div className="mt-6 grid gap-3 sm:grid-cols-3">
                     {[
@@ -1318,17 +1395,24 @@ export default function HomePage() {
                     src={deckImages.ask}
                     videoSrc={sectionMotionVideos.ask}
                     alt="A glowing rocket visual representing growth and competitive acceleration."
-                    eyebrow="Scale Up"
-                    title="Capital turns product velocity into durable market advantage."
+                    eyebrow="Scale Systems"
+                    title="Capital turns velocity into durable market advantage."
                     className="min-h-[220px]"
                     imageClassName="object-top"
                   />
                 </div>
-                <p className="text-xs uppercase tracking-[0.25em] text-primary">The Ask</p>
-                <p className="mt-4 text-6xl leading-none" style={{ color: primaryText }}>
-                  $3M
-                </p>
-                <p className="mt-2 text-lg text-gray-400">Seed Round</p>
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.25em] text-primary">The Ask</p>
+                    <p className="mt-4 text-6xl leading-none" style={{ color: primaryText }}>
+                      $3M
+                    </p>
+                    <p className="mt-2 text-lg text-gray-400">Seed Round</p>
+                  </div>
+                  <div className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[10px] uppercase tracking-[0.22em] text-primary/80">
+                    Product + compute + GTM
+                  </div>
+                </div>
                 <div className="mt-8 rounded-[1.5rem] border border-white/5 bg-[#0c0c0c] p-4">
                   <p className="text-[10px] uppercase tracking-[0.24em] text-gray-500">Use of funds</p>
                   <div className="mt-4 space-y-3">
