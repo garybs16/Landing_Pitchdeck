@@ -2,7 +2,7 @@
 
 import { WordsPullUpMultiStyle } from "@/components/words-pull-up";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Coins, X } from "lucide-react";
+import { ArrowRight, Check, Coins, UserRound, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 const primaryText = "#E1E0CC";
@@ -179,13 +179,15 @@ const founderCards = [
     name: "[Founder Name]",
     role: "CEO",
     text: "Ex-Pixar tools lead. PhD in 3D Vision.",
-    proof: "Creative tooling + vision systems"
+    proof: "Creative tooling + vision systems",
+    portraitLabel: "Founder photo"
   },
   {
     name: "[Founder Name]",
     role: "CTO",
     text: "Ex-OpenAI researcher. Gen-video models.",
-    proof: "Frontier model and inference depth"
+    proof: "Frontier model and inference depth",
+    portraitLabel: "Co-founder photo"
   }
 ];
 
@@ -234,14 +236,14 @@ function SectionHeader({
   }
 
   return (
-    <div className="mb-10 grid gap-5 border-b border-white/5 pb-10 sm:mb-12 sm:gap-6 sm:pb-12 lg:grid-cols-[132px_minmax(0,1fr)] lg:gap-10">
+    <div className="mb-10 grid gap-5 border-b border-white/5 pb-10 sm:mb-12 sm:gap-6 sm:pb-12 xl:grid-cols-[132px_minmax(0,1fr)] xl:gap-10">
       <div>
         <SectionTag>{label}</SectionTag>
         <p className="mt-4 text-5xl font-light tracking-[-0.06em] text-white/18">{index}</p>
       </div>
       <div className="min-w-0">
         {children}
-        <p className="mt-7 max-w-[32rem] rounded-[1.5rem] border border-white/8 bg-black/45 px-5 py-4 text-[13px] leading-relaxed text-gray-400 backdrop-blur-md sm:text-sm lg:ml-auto xl:max-w-[35rem]">
+        <p className="mt-7 max-w-[34rem] rounded-[1.5rem] border border-white/8 bg-black/45 px-5 py-4 text-[13px] leading-relaxed text-gray-400 backdrop-blur-md sm:text-sm xl:ml-auto xl:max-w-[35rem]">
           {note}
         </p>
       </div>
@@ -328,7 +330,7 @@ function SectionShell({
   return (
     <section
       id={id}
-      className={`relative isolate px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24 min-[2200px]:px-10 min-[2200px]:py-28 min-[3200px]:px-14 min-[3200px]:py-32 ${className}`}
+      className={`relative isolate px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-22 xl:py-24 min-[2200px]:px-10 min-[2200px]:py-28 min-[3200px]:px-14 min-[3200px]:py-32 ${className}`}
     >
       <div className="cream-glow pointer-events-none absolute left-1/2 top-0 h-48 w-[28rem] -translate-x-1/2 opacity-30" />
       <div className="mx-auto w-full max-w-[1500px] 2xl:max-w-[1680px] min-[2200px]:max-w-[1920px] min-[2800px]:max-w-[2280px] min-[3400px]:max-w-[2880px]">
@@ -611,8 +613,8 @@ export default function HomePage() {
 
   return (
     <main className="relative bg-black">
-      <section className="h-screen p-4 md:p-6 2xl:p-8 min-[2200px]:p-10 min-[3200px]:p-12">
-        <div className="relative mx-auto h-full w-full max-w-[2200px] overflow-hidden rounded-2xl bg-black shadow-cinematic md:rounded-[2rem] min-[2200px]:max-w-[2880px] min-[3200px]:max-w-[3600px]">
+      <section className="min-h-[100svh] p-3 sm:p-4 md:p-6 2xl:p-8 min-[2200px]:p-10 min-[3200px]:p-12 xl:h-screen">
+        <div className="relative mx-auto min-h-[calc(100svh-1.5rem)] w-full max-w-[2200px] overflow-hidden rounded-2xl bg-black shadow-cinematic md:min-h-[calc(100svh-3rem)] md:rounded-[2rem] xl:h-full min-[2200px]:max-w-[2880px] min-[3200px]:max-w-[3600px]">
           <video
             ref={heroVideoRef}
             autoPlay
@@ -631,7 +633,7 @@ export default function HomePage() {
           <div className="vignette-overlay absolute inset-0" />
 
           <div className="relative z-10 flex h-full flex-col p-4 sm:p-6 md:p-8 lg:p-10 2xl:p-12 min-[2200px]:p-14 min-[3200px]:p-16">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
               <div className="rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-sm">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-gray-500">Deck Format</p>
                 <p className="mt-1 text-base sm:text-lg" style={{ color: primaryText }}>
@@ -639,7 +641,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="flex flex-col items-start gap-4 lg:items-end">
+              <div className="flex flex-col items-start gap-4 xl:items-end">
                 <div className="max-w-full overflow-x-auto rounded-full bg-black px-4 py-2 md:px-8">
                   <nav className="flex min-w-max items-center gap-3 sm:gap-6 md:gap-10">
                     {navItems.map((item) => (
@@ -654,7 +656,7 @@ export default function HomePage() {
                     ))}
                   </nav>
                 </div>
-                <div className="hidden gap-3 lg:flex">
+                <div className="hidden flex-wrap gap-3 md:flex xl:justify-end">
                   {heroStats.map(([value, label]) => (
                     <StatChip key={label} value={value} label={label} />
                   ))}
@@ -662,8 +664,8 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="grid flex-1 gap-8 pt-10 md:pt-14 lg:grid-cols-[minmax(0,1.05fr)_420px] lg:items-end 2xl:grid-cols-[minmax(0,1fr)_460px] min-[2200px]:grid-cols-[minmax(0,1.05fr)_560px] min-[3200px]:grid-cols-[minmax(0,1.08fr)_660px] min-[2200px]:gap-12">
-              <div className="flex flex-col justify-end pb-4 lg:pb-10 2xl:pb-12 min-[2200px]:pb-20 min-[3200px]:pb-24">
+            <div className="grid flex-1 gap-8 pt-10 md:pt-12 xl:grid-cols-[minmax(0,1.05fr)_minmax(320px,420px)] xl:items-end 2xl:grid-cols-[minmax(0,1fr)_460px] min-[2200px]:grid-cols-[minmax(0,1.05fr)_560px] min-[3200px]:grid-cols-[minmax(0,1.08fr)_660px] min-[2200px]:gap-12 [@media(max-height:900px)]:gap-6 [@media(max-height:900px)]:pt-6">
+              <div className="flex flex-col justify-end pb-4 xl:pb-10 2xl:pb-12 min-[2200px]:pb-20 min-[3200px]:pb-24">
                 <p className="text-[10px] uppercase tracking-[0.35em] text-primary sm:text-xs">
                   Unstable ML
                 </p>
@@ -674,10 +676,10 @@ export default function HomePage() {
                   className="mt-6 font-medium leading-[0.86] tracking-[-0.08em] text-[clamp(3.2rem,8vw,9rem)] min-[2200px]:mt-8 min-[2200px]:text-[clamp(5rem,7vw,12rem)] min-[3200px]:text-[clamp(6rem,6.7vw,14.5rem)]"
                   style={{ color: primaryText }}
                 >
-                  <span className="block lg:inline">
+                  <span className="block xl:inline">
                     Unstable
                   </span>
-                  <span className="block pl-[0.04em] lg:ml-[0.08em] lg:inline lg:pl-0">
+                  <span className="block pl-[0.04em] xl:ml-[0.08em] xl:inline xl:pl-0">
                     ML
                   </span>
                 </div>
@@ -689,7 +691,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="self-end rounded-[2rem] border border-white/10 bg-black/42 p-5 shadow-cinematic backdrop-blur-md sm:p-6 min-[2200px]:rounded-[2.25rem] min-[2200px]:p-8 min-[3200px]:p-10">
+              <div className="mt-auto w-full max-w-xl self-end rounded-[2rem] border border-white/10 bg-black/42 p-5 shadow-cinematic backdrop-blur-md sm:p-6 xl:max-w-none min-[2200px]:rounded-[2.25rem] min-[2200px]:p-8 min-[3200px]:p-10">
                 <p className="max-w-md text-sm leading-[1.45] text-primary/70 md:text-base min-[2200px]:max-w-[36rem] min-[2200px]:text-lg min-[3200px]:text-[1.35rem]">
                   The page keeps the original pitch-deck sequence, but reframes it as a dark,
                   premium investor narrative with clearer structure and more cinematic visual weight.
@@ -763,7 +765,7 @@ export default function HomePage() {
               />
             </div>
           </div>
-          <div className="mt-10 grid gap-5 xl:gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="mt-10 grid gap-5 xl:gap-6 xl:grid-cols-[1.15fr_0.85fr]">
             <EditorialImageCard
               src={deckImages.problem}
               videoSrc={sectionMotionVideos.problem}
@@ -795,7 +797,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="solution">
-        <div className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_360px] xl:items-start xl:gap-5">
+        <div className="grid gap-6 2xl:grid-cols-[minmax(0,1.2fr)_360px] 2xl:items-start 2xl:gap-5">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] border border-white/5 bg-[#0a0a0a] p-6 shadow-cinematic sm:p-8 md:p-10">
               <SectionBackdrop
@@ -822,7 +824,7 @@ export default function HomePage() {
                   />
                 </div>
               </SectionHeader>
-              <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_260px] xl:items-start">
+              <div className="grid gap-5 2xl:grid-cols-[minmax(0,1fr)_260px] 2xl:items-start">
                 <div className="rounded-[1.6rem] border border-white/8 bg-black/35 p-5 backdrop-blur-md sm:p-6">
                   <p className="max-w-[34rem] text-sm leading-relaxed text-primary/78 sm:text-base">
                     The product removes weeks of manual production overhead without removing directorial
@@ -972,7 +974,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="market">
-        <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-7">
+        <div className="grid gap-6 xl:grid-cols-[0.95fr_1.05fr] xl:gap-7">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
               <SectionBackdrop
@@ -1148,7 +1150,7 @@ export default function HomePage() {
       </SectionShell>
 
       <SectionShell id="traction">
-        <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:gap-7">
+        <div className="grid gap-6 xl:grid-cols-[1.05fr_0.95fr] xl:gap-7">
           <RevealCard delay={0}>
             <div className="relative overflow-hidden rounded-[2rem] bg-[#101010] p-6 shadow-cinematic sm:p-8">
               <SectionBackdrop
@@ -1372,20 +1374,31 @@ export default function HomePage() {
               />
             </div>
           </SectionHeader>
-          <div className="mt-4 grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:gap-7">
+          <div className="mt-4 grid gap-6 xl:grid-cols-[1fr_0.9fr] xl:gap-7">
             <div className="flex h-full flex-col gap-4">
               <div className="grid gap-4 md:grid-cols-2">
                 {founderCards.map((person, index) => (
                   <RevealCard key={person.role} delay={0.1 * index}>
                     <div className="rounded-[1.5rem] border border-white/5 bg-black/60 p-5">
-                      <p className="text-[10px] uppercase tracking-[0.22em] text-primary/75">{person.proof}</p>
-                      <p className="text-2xl" style={{ color: primaryText }}>
+                      <div className="mb-5 flex justify-center">
+                        <div className="relative">
+                          <div className="absolute inset-0 rounded-full bg-primary/10 blur-xl" />
+                          <div className="relative flex h-28 w-28 items-center justify-center rounded-full border border-white/12 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.12),rgba(0,0,0,0.85)_70%)] shadow-cinematic">
+                            <div className="flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-white/12 bg-black/35 text-primary/85">
+                              <UserRound className="h-9 w-9" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-center text-[10px] uppercase tracking-[0.22em] text-gray-500">{person.portraitLabel}</p>
+                      <p className="mt-4 text-center text-[10px] uppercase tracking-[0.22em] text-primary/75">{person.proof}</p>
+                      <p className="mt-3 text-center text-2xl" style={{ color: primaryText }}>
                         {person.name}
                       </p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.25em] text-primary">
+                      <p className="mt-2 text-center text-xs uppercase tracking-[0.25em] text-primary">
                         {person.role}
                       </p>
-                      <p className="mt-4 text-[15px] leading-relaxed text-gray-300">{person.text}</p>
+                      <p className="mt-4 text-center text-[15px] leading-relaxed text-gray-300">{person.text}</p>
                     </div>
                   </RevealCard>
                 ))}
