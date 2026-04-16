@@ -2,7 +2,7 @@
 
 import { WordsPullUpMultiStyle } from "@/components/words-pull-up";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, X } from "lucide-react";
+import { ArrowRight, Check, Coins, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 const primaryText = "#E1E0CC";
@@ -142,15 +142,17 @@ const tractionPlans = [
     title: "Free",
     price: "$0",
     suffix: "/mo",
-    text: "800 monthly credits remove friction, seed habit, and widen the top of funnel.",
-    note: "Top-of-funnel acquisition"
+    text: "Frictionless entry built to widen the funnel and create habit.",
+    note: "Top-of-funnel acquisition",
+    stats: ["800 credits", "Free forever"]
   },
   {
     title: "Pro",
     price: "$20",
     suffix: "/mo",
-    text: "15,000 monthly credits at 25% margin, priced to maximize conversion and subscriber volume.",
-    note: "$192/year prepaid, equal to $16/mo after a 20% discount"
+    text: "Low-price paid tier optimized for broad conversion and subscriber volume.",
+    note: "$192/year prepaid, equal to $16/mo after a 20% discount",
+    stats: ["15,000 credits", "25% margin"]
   }
 ];
 const tractionLoop = [
@@ -168,7 +170,7 @@ const tractionLoop = [
   }
 ];
 const onDemandBilling = [
-  { label: "Refill rate", value: "2c / 10 credits" },
+  { label: "Refill rate", value: "2 cents / 10 credits" },
   { label: "Billing cadence", value: "Weekly" },
   { label: "Margin profile", value: "100%" }
 ];
@@ -1249,12 +1251,22 @@ export default function HomePage() {
                     <RevealCard key={tier.title} delay={0.08 * index}>
                       <div className="rounded-[1.5rem] bg-[#151515] p-5">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                          <div>
+                          <div className="min-w-0">
                             <p className="text-lg" style={{ color: primaryText }}>
                               {tier.title}
                             </p>
                             <p className="mt-2 text-sm text-gray-400">{tier.text}</p>
-                            <p className="mt-3 text-xs uppercase tracking-[0.2em] text-primary/75">{tier.note}</p>
+                            <div className="mt-4 flex flex-wrap gap-2">
+                              {tier.stats.map((stat) => (
+                                <span
+                                  key={stat}
+                                  className="rounded-full border border-white/10 bg-black/35 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-primary/80"
+                                >
+                                  {stat}
+                                </span>
+                              ))}
+                            </div>
+                            <p className="mt-4 text-xs uppercase tracking-[0.2em] text-primary/75">{tier.note}</p>
                           </div>
                           <p className="text-right text-2xl" style={{ color: primaryText }}>
                             {tier.price}
@@ -1294,10 +1306,23 @@ export default function HomePage() {
                 <div className="relative z-10">
                 <SectionTag>On-Demand Billing</SectionTag>
                 <div className="mt-6 rounded-[1.5rem] bg-[#151515] p-5">
-                  <p className="text-3xl leading-none" style={{ color: primaryText }}>
-                    2c / 10 credits
-                  </p>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-400">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-black/35 text-primary">
+                        <Coins className="h-5 w-5" />
+                      </div>
+                      <p className="mt-4 text-3xl leading-none" style={{ color: primaryText }}>
+                        2 cents
+                      </p>
+                      <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-primary/75">
+                        Per 10 credits
+                      </p>
+                    </div>
+                    <div className="rounded-full border border-white/10 bg-black/35 px-4 py-2 text-[10px] uppercase tracking-[0.18em] text-primary/75">
+                      Usage refill
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-gray-400">
                     When Pro users exhaust 15,000 monthly credits, they keep going immediately
                     through refill billing instead of waiting for reset.
                   </p>
