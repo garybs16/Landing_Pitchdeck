@@ -176,18 +176,18 @@ const onDemandBilling = [
 ];
 const founderCards = [
   {
-    name: "[Founder Name]",
+    name: "Founder",
     role: "CEO",
     text: "Ex-Pixar tools lead. PhD in 3D Vision.",
     proof: "Creative tooling + vision systems",
-    portraitLabel: "Founder photo"
+    portraitLabel: "Add founder photo"
   },
   {
-    name: "[Founder Name]",
+    name: "Co-Founder",
     role: "CTO",
     text: "Ex-OpenAI researcher. Gen-video models.",
     proof: "Frontier model and inference depth",
-    portraitLabel: "Co-founder photo"
+    portraitLabel: "Add co-founder photo"
   }
 ];
 
@@ -635,9 +635,9 @@ export default function HomePage() {
           <div className="relative z-10 flex h-full flex-col p-4 sm:p-6 md:p-8 lg:p-10 2xl:p-12 min-[2200px]:p-14 min-[3200px]:p-16">
             <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
               <div className="rounded-full border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-sm">
-                <p className="text-[10px] uppercase tracking-[0.28em] text-gray-500">Deck Format</p>
+                <p className="text-[10px] uppercase tracking-[0.28em] text-gray-500">Investor Deck</p>
                 <p className="mt-1 text-base sm:text-lg" style={{ color: primaryText }}>
-                  Seed narrative 01/08
+                  Seed story 01/08
                 </p>
               </div>
 
@@ -693,8 +693,8 @@ export default function HomePage() {
 
               <div className="mt-auto w-full max-w-xl self-end rounded-[2rem] border border-white/10 bg-black/42 p-5 shadow-cinematic backdrop-blur-md sm:p-6 xl:max-w-none min-[2200px]:rounded-[2.25rem] min-[2200px]:p-8 min-[3200px]:p-10">
                 <p className="max-w-md text-sm leading-[1.45] text-primary/70 md:text-base min-[2200px]:max-w-[36rem] min-[2200px]:text-lg min-[3200px]:text-[1.35rem]">
-                  The page keeps the original pitch-deck sequence, but reframes it as a dark,
-                  premium investor narrative with clearer structure and more cinematic visual weight.
+                  AI-native 3D creation collapses production time, lowers iteration cost, and turns
+                  creative demand into scalable software revenue.
                 </p>
                 <div className="mt-5 grid grid-cols-3 gap-3 min-[2200px]:mt-6 min-[2200px]:gap-4">
                   {heroStats.map(([value, label]) => (
@@ -713,7 +713,7 @@ export default function HomePage() {
                   </a>
                 </div>
                 <p className="mt-5 text-xs text-gray-500 sm:text-sm min-[2200px]:mt-6 min-[2200px]:text-base min-[3200px]:text-lg">
-                  [Founder Name], CEO | [Founder Name], CTO
+                  Founder, CEO | Co-Founder, CTO
                 </p>
                 <div className="mt-5 min-[2200px]:mt-7">
                   <OrbitalVisual />
@@ -738,7 +738,7 @@ export default function HomePage() {
           <SectionHeader
             index="02"
             label="Problem"
-            note="The opening investor question is simple: why does this market need a new production primitive at all?"
+            note="Creative production is still too slow, too manual, and too expensive for the next wave of demand."
             center
           >
             <div className="mx-auto max-w-4xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl xl:text-7xl">
@@ -811,7 +811,7 @@ export default function HomePage() {
               <SectionHeader
                 index="03"
                 label="Solution"
-                note="This section should read like the value unlock: speed, affordability, and creative control in one motion."
+                note="Unstable ML compresses time, cost, and technical overhead into a prompt-first production workflow."
               >
                 <div className="max-w-4xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl lg:text-6xl">
                   <WordsPullUpMultiStyle
@@ -900,7 +900,7 @@ export default function HomePage() {
           <SectionHeader
             index="04"
             label="Product"
-            note="Organize the product like a workflow, not a feature dump. One hero canvas, then the supporting modules."
+            note="A production workflow built for speed, control, and export-ready outputs."
             center
           >
             <div className="mx-auto max-w-4xl text-xl sm:text-2xl md:text-3xl lg:text-4xl">
@@ -988,7 +988,7 @@ export default function HomePage() {
               <SectionHeader
                 index="05"
                 label="Market"
-                note="The market block should quickly establish scale, timing, and why AI-native behavior makes the wedge credible."
+                note="The market is large, timing is right, and creator behavior is already shifting AI-native."
               >
                 <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
                   <WordsPullUpMultiStyle
@@ -1164,7 +1164,7 @@ export default function HomePage() {
               <SectionHeader
                 index="07"
                 label="Traction"
-                note="Low-friction entry. Cheap paid conversion. Expansion once active users run through credits."
+                note="Free drives adoption. Paid converts volume. Usage expands revenue."
               >
                 <div className="text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
                   <WordsPullUpMultiStyle
@@ -1362,7 +1362,7 @@ export default function HomePage() {
           <SectionHeader
             index="08"
             label="Team & Ask"
-            note="The close should feel decisive: the right team, a crisp raise, and a clear deployment plan."
+            note="The team has the technical depth to build it and the raise is sized to scale it."
           >
             <div className="max-w-3xl text-3xl leading-[0.95] sm:text-4xl sm:leading-[0.9] md:text-5xl">
               <WordsPullUpMultiStyle
@@ -1407,7 +1407,7 @@ export default function HomePage() {
                 <div className="flex flex-1 flex-col rounded-[1.6rem] border border-white/5 bg-black/38 p-6 backdrop-blur-sm">
                   <p className="text-[10px] uppercase tracking-[0.28em] text-primary sm:text-xs">Why This Team</p>
                   <p className="mt-4 max-w-2xl text-lg leading-relaxed text-primary/90 sm:text-[1.35rem]">
-                    Product taste, creative tooling depth, and model expertise sit in the same founding team.
+                    Creative tooling, 3D systems, and frontier model expertise sit in the same founding team.
                   </p>
                   <div className="mt-6 grid gap-3 sm:grid-cols-3">
                     {[
@@ -1433,7 +1433,7 @@ export default function HomePage() {
                     src={deckImages.ask}
                     videoSrc={sectionMotionVideos.ask}
                     alt="A glowing rocket visual representing growth and competitive acceleration."
-                    eyebrow="Scale Systems"
+                    eyebrow="Scale"
                     title="Capital turns velocity into durable market advantage."
                     className="min-h-[220px]"
                     imageClassName="object-top"
@@ -1470,7 +1470,7 @@ export default function HomePage() {
                 </div>
                 <div className="mt-auto pt-10">
                   <p className="text-sm text-gray-500">founders@unstableml.ai</p>
-                  <p className="mt-2 text-sm text-primary/80">Data room and live demo available</p>
+                  <p className="mt-2 text-sm text-primary/80">Demo and data room available on request</p>
                   <a
                     href="mailto:founders@unstableml.ai"
                     className="group mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-black transition-all hover:gap-3"
