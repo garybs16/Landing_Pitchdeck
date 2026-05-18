@@ -7,26 +7,30 @@ const teamMembers = [
   {
     initials: "SM",
     name: "Samit M.",
-    role: "CEO / Co-Founder",
-    imageSrc: ""
+    role: "CEO / Co-Founder / Full stack developer",
+    imageSrc: "/team/samit-m.jpg",
+    description: "Prior CEO at UnstableML, works with open source diffusion models, and leads product strategy."
   },
   {
     initials: "JL",
     name: "Justin Li",
     role: "Backend developer",
-    imageSrc: ""
+    imageSrc: "/team/justin-li.jpg",
+    description: "M.S. in CS, Specializing in AI agent workflows."
   },
   {
     initials: "JY",
     name: "Justin Yee",
     role: "Full stack developer",
-    imageSrc: ""
+    imageSrc: "/team/justin-yee.png",
+    description: "Computer vision and frontend experience, with hands-on autonomous systems work through RoboSub and UCR Solar Car."
   },
   {
     initials: "NK",
     name: "Nick Kulinich",
     role: "Frontend developer",
-    imageSrc: ""
+    imageSrc: "/team/nick-k.jpg",
+    description: "6+ years of frontend engineering experience, specializing in React, Vue, TypeScript, Tailwind, and AI/3D product interfaces,"
   }
 ];
 
@@ -52,7 +56,7 @@ export default function TeamAskSection() {
               06 / TEAM
             </p>
             <h2 className="max-w-4xl text-3xl tracking-tight text-white md:text-5xl">
-              Built by operators who know the stack.
+              Built by engineers who know the stack.
             </h2>
           </div>
 
@@ -100,6 +104,9 @@ export default function TeamAskSection() {
                 <p className="text-xl tracking-tight text-white">{member.name}</p>
                 <p className="mt-1 text-sm leading-snug text-white/58">
                   {member.role}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-white/40">
+                  {member.description}
                 </p>
               </div>
             </motion.div>

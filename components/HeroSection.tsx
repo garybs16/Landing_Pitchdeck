@@ -98,12 +98,15 @@ export default function HeroSection() {
             <h1
               className="mb-5 max-w-4xl text-5xl leading-[0.92] tracking-tight text-white md:text-6xl lg:text-[5.15rem]"
             >
-              UnstableML
+              Series
               <br />
               Pitch Deck
             </h1>
 
-            <p className="max-w-2xl text-sm leading-relaxed text-white/58 md:text-[15px]">
+            <p 
+              className="max-w-2xl text-base font-bold leading-relaxed text-white drop-shadow-md md:text-lg"
+              style={{ textShadow: "0px 2px 12px rgba(0,0,0,0.9)" }}
+            >
               World agent that builds 3D scenes on your browser and renders them as video in real-time.
             </p>
 

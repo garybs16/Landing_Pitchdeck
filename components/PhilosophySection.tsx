@@ -19,50 +19,28 @@ export default function PhilosophySection() {
         >
           <div className="max-w-5xl text-3xl leading-tight tracking-tight text-white md:text-5xl">
             <span className="deck-kicker mb-5 block text-xs">
-              04 / VISION
+              03 / VISION
             </span>
-            The midpoint where{" "}
-            <span
-              className="text-white/54"
-              style={{ fontStyle: "italic" }}
-            >
-              AI
-            </span>{" "}
-            and 3D tools work together.
+            The missing layer between AI video and real production.
           </div>
 
-          <p className="max-w-xs text-sm leading-relaxed text-white/58 md:justify-self-end md:text-right">
-            A product space where creators can use AI capabilities and professional tools in the same workflow.
+          <p className="max-w-sm text-sm leading-relaxed text-white/58 md:justify-self-end md:text-right">
+            AI video is the future, but today it often feels like “slop” because creators are stuck directing with prompts instead of scenes.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="deck-frame deck-media relative aspect-[16/11] w-full overflow-hidden rounded-[1.9rem]"
+            className="deck-frame deck-media relative w-full self-start overflow-hidden rounded-[1.9rem]"
           >
-            <LazyVideo
-              src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260307_083826_e938b29f-a43a-41ec-a153-3d4730578ab8.mp4"
-              muted
-              autoPlay
-              loop
-              playsInline
-              preload="metadata"
-              className="h-full w-full object-cover"
+            <img
+              src="/editor.png"
+              alt="Editor showing dragon and castle"
+              className="h-auto w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/74 via-black/16 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-              <div className="deck-panel deck-frame deck-tint-cool max-w-md rounded-[1.7rem] bg-black/64 p-5">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-white/48">
-                  Product vision
-                </p>
-                <p className="mt-2 text-xl leading-tight tracking-tight text-white/96 md:text-[1.7rem]">
-                  Give artists the power of AI and the control of the tools they already trust.
-                </p>
-              </div>
-            </div>
           </motion.div>
 
           <motion.div
@@ -72,40 +50,31 @@ export default function PhilosophySection() {
             className="grid gap-4"
           >
             <div className="deck-panel-matte deck-frame deck-tint-warm rounded-[1.75rem] p-6">
-              <p className="mb-4 text-xs uppercase tracking-widest text-white/52">
+              <p className="mb-3 text-xs uppercase tracking-widest text-white/52">
                 THE GAP
               </p>
-              <p className="text-sm leading-relaxed text-white/66 md:text-base">
-                AI is powerful, and tools like Blender and Adobe are precise. Creators need a place where both strengths are available at once.
+              <p className="text-sm leading-relaxed text-white/70">
+                This is not just a model problem. It is a modality problem. Prompts cannot capture the full creative intent behind motion, camera, lighting, timing, characters, and continuity.
               </p>
             </div>
 
             <div className="deck-panel-matte deck-frame deck-tint-cool rounded-[1.75rem] p-6">
-              <p className="mb-4 text-xs uppercase tracking-widest text-white/52">
+              <p className="mb-3 text-xs uppercase tracking-widest text-white/52">
                 OUR ROLE
               </p>
-              <p className="text-sm leading-relaxed text-white/66 md:text-base">
-                Build the midpoint product where generative speed and production control can live in the same creative process.
+              <p className="text-sm leading-relaxed text-white/70">
+                We create a controllable 3D scene that becomes the source of truth for the video. The creator directs the world, the agent helps build and animate it, and diffusion models turn it into polished output.
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="deck-panel-soft deck-frame rounded-[1.55rem] p-5">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-white/46">
-                  Today
-                </p>
-                <p className="mt-3 text-lg leading-tight tracking-tight text-white/94">
-                  AI-assisted 3D creation.
-                </p>
-              </div>
-              <div className="deck-panel-soft deck-frame rounded-[1.55rem] p-5">
-                <p className="text-[11px] uppercase tracking-[0.28em] text-white/46">
-                  Next
-                </p>
-                <p className="mt-3 text-lg leading-tight tracking-tight text-white/94">
-                  One creative midpoint.
-                </p>
-              </div>
+            <div className="deck-panel-soft deck-frame rounded-[1.75rem] p-6">
+              <p className="mb-3 text-xs uppercase tracking-widest text-white/52">
+                BOTTOM LINE
+              </p>
+              <p className="text-sm font-medium leading-relaxed text-white/94">
+                Not replacing video production.<br />
+                Giving diffusion models the structure they need to produce better video.
+              </p>
             </div>
           </motion.div>
         </div>

@@ -10,8 +10,8 @@ export default function HomePage() {
     <main className="min-h-screen overflow-x-hidden bg-black selection:bg-white/20 selection:text-white">
       <HeroSection />
       <FeaturedVideoSection />
-      <AboutSection />
       <PhilosophySection />
+      <AboutSection />
       <ServicesSection />
       <TeamAskSection />
     </main>

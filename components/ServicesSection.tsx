@@ -43,18 +43,18 @@ export default function ServicesSection() {
               05 / PRICING
             </p>
             <h2 className="max-w-5xl text-3xl leading-tight tracking-tight text-white md:text-5xl">
-              Pricing built for usage.{" "}
-              <span
+              Pricing Plans
+              {/* <span
                 className="text-white/82"
                 style={{ fontStyle: "italic" }}
               >
                 Free entry, paid depth.
-              </span>
+              </span> */}
             </h2>
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-white/60 md:justify-self-end md:text-right">
+          {/* <p className="max-w-xs text-sm leading-relaxed text-white/60 md:justify-self-end md:text-right">
             Free entry. Pro plan. On-demand after cap.
-          </p>
+          </p> */}
         </motion.div>
 
         <div className="grid gap-3">
@@ -71,7 +71,7 @@ export default function ServicesSection() {
               loop
               playsInline
               preload="metadata"
-              className="aspect-[16/6.7] h-full w-full object-cover"
+              className="aspect-[16/4] h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/38 to-black/12" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_50%,_rgba(214,164,98,0.24),_transparent_24%)]" />
@@ -81,7 +81,7 @@ export default function ServicesSection() {
                   Revenue Engine
                 </p>
                 <p className="mt-2 max-w-2xl text-2xl leading-[1.08] tracking-tight text-white/96 md:text-[1.95rem]">
-                  Start free. Upgrade when usage gets serious.
+                  Free entry. Pro plan. On-demand after cap.
                 </p>
               </div>
             </div>
@@ -135,19 +135,19 @@ export default function ServicesSection() {
             >
               <div className="flex h-full flex-col">
                 <p className="text-[11px] uppercase tracking-[0.32em] text-white/60">
-                  On-demand billing
+                  Revenue Projections
                 </p>
-                <p className="mt-5 text-4xl leading-none tracking-tight text-white md:text-[3.2rem]">
-                  $0.05
+                <p className="mt-5 text-4xl leading-none tracking-tight text-white md:text-[2.8rem]">
+                  $1.1M–$1.4M+
                 </p>
-                <p className="mt-2 text-lg text-white/72">per credit</p>
+                <p className="mt-2 text-lg text-white/72">Year 1 Estimate</p>
 
                 <div className="mt-6 space-y-3">
                   {[
-                    "1 credit = 5 cents (double what the plans offer)",
-                    "Pro only",
-                    "After 15,000 credits",
-                    "Billed weekly"
+                    "Subscriptions drive core revenue",
+                    "On-demand credits drive profit upside (1 credit = 5 cents - double the plan price)",
+                    "Year 1 target: 4k–5k Pro users",
+                    "Annual sub revenue: $960K–$1.2M"
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3 text-sm text-white/84">
                       <span className="mt-0.5 text-white/90">+</span>
@@ -157,11 +157,13 @@ export default function ServicesSection() {
                 </div>
 
                 <p className="mt-auto pt-7 text-sm leading-relaxed text-white/68">
-                  Extra credit when monthly usage runs out, priced at double what the plans offer.
+                  If 30% of users buy extra on-demand credits, total revenue meaningfully increases beyond base subscriptions.
                 </p>
               </div>
             </motion.div>
           </div>
+
+
         </div>
       </div>
     </section>

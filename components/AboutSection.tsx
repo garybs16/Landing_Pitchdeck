@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import LazyVideo from "@/components/LazyVideo";
 const features = [
   {
     tag: "01",
@@ -23,9 +24,9 @@ const features = [
   },
   {
     tag: "04",
-    title: "Rigging and 700+ animations",
+    title: "Rigging and animations",
     detail:
-      "Rig humanoid characters and apply 700+ built-in animations for blocking, movement, and fast performance iteration."
+      "The agent can rig objects and characters, then creates various animations like running, fighting, flying, and much more to match the storytelling. This brings life-like motion for all 3d assets."
   }
 ];
 
@@ -48,7 +49,7 @@ export default function AboutSection() {
         >
           <div>
             <p className="deck-kicker mb-6 text-xs">
-              03 / FEATURES
+              04 / FEATURES
             </p>
 
             <h2 className="max-w-5xl text-3xl leading-tight tracking-tight text-white md:text-5xl">
@@ -65,24 +66,15 @@ export default function AboutSection() {
               transition={{ duration: 0.75, delay: 0.12 }}
               className="deck-frame deck-media relative overflow-hidden rounded-[2rem]"
             >
-              <img
-                src="/core-capabilities-scene.jpg"
-                alt=""
+              <LazyVideo
+                src="/preview.mp4"
+                muted
+                autoPlay
+                loop
+                playsInline
+                preload="metadata"
                 className="aspect-[4/3] w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/24 to-black/6" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,_rgba(151,176,209,0.16),_transparent_24%)]" />
-
-              <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                <div className="deck-panel deck-frame max-w-md rounded-[1.6rem] bg-black/64 p-4 md:p-5">
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/52">
-                    Browser-Based 3D Scene
-                  </p>
-                  <p className="mt-3 text-2xl leading-[1.02] tracking-tight text-white md:text-[2rem]">
-                    Full control over the world, camera, characters, and motion.
-                  </p>
-                </div>
-              </div>
             </motion.div>
 
             <motion.div
@@ -92,21 +84,21 @@ export default function AboutSection() {
               className="deck-frame deck-media relative overflow-hidden rounded-[1.7rem]"
             >
               <img
-                src="/core-capabilities-world.jpg"
+                src="/realtime.png"
                 alt=""
                 className="aspect-[16/9] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/82 via-black/24 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-5">
+              {/* <div className="absolute bottom-0 left-0 right-0 p-5">
                 <p className="max-w-sm text-lg leading-tight tracking-tight text-white/96 md:text-xl">
                   Skyboxes, world mapping, and real-time visual feedback.
                 </p>
-              </div>
+              </div> */}
             </motion.div>
           </div>
 
           <div className="grid gap-4">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 28 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
               transition={{ duration: 0.7, delay: 0.18 }}
@@ -121,7 +113,7 @@ export default function AboutSection() {
               <p className="mt-3 text-sm leading-relaxed text-white/68">
                 Instead of accepting a flattened output from a prompt, creators and agents can tangibly control character movement, camera movement, motion, and scene changes.
               </p>
-            </motion.div>
+            </motion.div> */}
 
             <div className="grid gap-4 sm:grid-cols-2">
               {features.map((feature, index) => (

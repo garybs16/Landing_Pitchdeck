@@ -10,17 +10,18 @@ export default function FeaturedVideoSection() {
 
   return (
     <section id="demo" className="deck-section deck-divider bg-black px-6 pb-20 pt-16 md:pb-24 md:pt-24">
-      <div className="mx-auto max-w-5xl" ref={ref}>
+      <div className="mx-auto w-full max-w-[1920px]" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
           transition={{ duration: 0.9 }}
-          className="deck-frame deck-media group relative aspect-video w-full overflow-hidden rounded-3xl"
+          className="deck-frame deck-media group relative aspect-[1920/646] w-full overflow-hidden rounded-3xl"
         >
           <LazyVideo
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260402_054547_9875cfc5-155a-4229-8ec8-b7ba7125cbf8.mp4"
+            src="/demo.mp4"
             muted
             autoPlay
+            controls
             loop
             playsInline
             preload="metadata"
@@ -36,7 +37,7 @@ export default function FeaturedVideoSection() {
             </p>
           </div>
 
-          <div className="absolute bottom-0 inset-x-0 flex flex-col justify-between gap-5 p-6 md:flex-row md:items-end md:p-8">
+          <div className="pointer-events-none absolute bottom-12 inset-x-0 flex flex-col justify-between gap-5 p-6 md:flex-row md:items-end md:p-8">
             <div className="deck-panel deck-frame max-w-md rounded-2xl bg-black/64 p-5 md:p-6">
               <p className="mb-3 text-xs uppercase tracking-widest text-white/60">
                 LIVE FLOW
